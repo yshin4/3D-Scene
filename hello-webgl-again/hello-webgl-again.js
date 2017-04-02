@@ -174,17 +174,23 @@
         // },
 
 
-        {
-            color: { r: 0.7, g: 0.0, b: 0.7 },
-            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-            mode: gl.TRIANGLES
-        },
+        // {
+        //     color: { r: 0.7, g: 0.0, b: 0.7 },
+        //     vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+        //     mode: gl.TRIANGLES
+        // },
 
         {
             color: { r: 0.0, g: 0.7, b: 0.8 },
-            vertices: Shapes.toRawLineArray(Shapes.icosahedron()),
+            vertices: Shapes.toRawLineArray(Shapes.icosahedronVertices()),
             mode: gl.LINES
         }
+
+        // {
+        //     color: { r: 0.0, g: 0.7, b: 0.8 },
+        //     vertices: Shapes.toRawLineArray(Shapes.icosahedron()),
+        //     mode: gl.LINES
+        // }
     ];
 
     // Pass the vertices to WebGL.
