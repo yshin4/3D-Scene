@@ -163,24 +163,30 @@
         //     mode: gl.LINE_LOOP
         // },
 
+        // {
+        //     color: { r: 0.0, g: 0.7, b: 0.8 },
+        //     vertices: Shapes.toRawLineArray(Shapes.sphere(3)),
+        //     mode: gl.LINES
+        // },
+
         {
             color: { r: 0.8, g: 0.9, b: 0.9 },
-            vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
+            vertices: Shapes.toRawTriangleArray(Shapes.crystal(1)),
             mode: gl.TRIANGLES
-        },
-
-
-        {
-            color: { r: 0.7, g: 0.0, b: 0.7 },
-            vertices: Shapes.toRawLineArray(Shapes.cube()),
-            mode: gl.LINES
-        },
-
-        {
-            color: { r: 0.0, g: 0.7, b: 0.8 },
-            vertices: Shapes.toRawLineArray(Shapes.sphere(3)),
-            mode: gl.LINES
         }
+
+        // {
+        //     color: { r: 0.8, g: 0.9, b: 0.9 },
+        //     vertices: Shapes.toRawLineArray(Shapes.pyramid()),
+        //     mode: gl.LINES
+        // },
+        //
+        //
+        // {
+        //     color: { r: 0.7, g: 0.0, b: 0.7 },
+        //     vertices: Shapes.toRawLineArray(Shapes.cube()),
+        //     mode: gl.LINES
+        // }
 
         // {
         //     color: { r: 0.0, g: 0.7, b: 0.8 },
