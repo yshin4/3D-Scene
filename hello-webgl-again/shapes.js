@@ -8,6 +8,28 @@
      * Returns the vertices for a small icosahedron.
      */
 
+    let pyramid = () => {
+
+        return {
+            vertices: [
+                [ 0, 0.5, 0 ],
+                [ -0.5, -0.5, 0.5 ],
+                [ 0.5, -0.5, 0.5 ],
+                [ 0.5, -0.5, -0.5 ],
+                [ -0.5, -0.5, -0.5 ]
+            ],
+
+            indices: [
+                [ 0, 1, 2 ],
+                [ 0, 2, 3 ],
+                [ 0, 3, 4 ],
+                [ 0, 4, 1 ],
+                [ 2, 1, 4 ],
+                [ 2, 4, 3 ]
+            ]
+        };
+    };
+
     let cube = () => {
 
       const x = 0.5;
@@ -240,6 +262,7 @@
     };
 
     window.Shapes = {
+        pyramid,
         sphere,
         cube,
         icosahedron,
