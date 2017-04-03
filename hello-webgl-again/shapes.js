@@ -43,51 +43,106 @@
         };
     };
 
-    let icosahedronVertices = () => {
-        const X = 1;
-        const t = Math.floor((1.0 + Math.sqrt(5.0)) / 12.0);
+    let sphere = (roundness) => {
+        roundness = roundness || 1;
+        const scale = 1/2;
+        const X = 1 * scale;
+        const t = ((1.0 + Math.sqrt(5.0)) / 2) * scale;
+
+        let vertices = [
+            [ -X, t, 0 ],
+            [ X, t, 0 ],
+            [ -X, -t, 0 ],
+            [ X, -t, 0 ],
+
+            [ 0, -X, t ],
+            [ 0, X, t ],
+            [ 0, -X, -t ],
+            [ 0, X, -t ],
+
+            [ t, 0, -X ],
+            [ t, 0, X ],
+            [ -t, 0, -X ],
+            [ -t, 0, X ]
+        ];
+
+        let indices = [
+            [ 0, 11, 5 ],
+            [ 0, 5, 1 ],
+            [ 0, 1, 7 ],
+            [ 0, 7, 10 ],
+            [ 0, 10, 11 ],
+
+            [ 1, 5, 9 ],
+            [ 5, 11, 4 ],
+            [ 11, 10, 2 ],
+            [ 10, 7, 6 ],
+            [ 7, 1, 8 ],
+
+            [ 3, 9, 4 ],
+            [ 3, 4, 2 ],
+            [ 3, 2, 6 ],
+            [ 3, 6, 8 ],
+            [ 3, 8, 9 ],
+
+            [ 4, 9, 5 ],
+            [ 2, 4, 11 ],
+            [ 6, 2, 10 ],
+            [ 8, 6, 7 ],
+            [ 9, 8, 1 ]
+        ];
+
+        indices = roundSphere(vertices, indices, roundness);
 
         return {
-            vertices: [
-                [ -X, t, 0 ],
-                [ X, t, 0 ],
-                [ -X, -t, 0 ],
-                [ X, -t, 0 ],
-                [ 0, -X, t ],
-                [ 0, X, t ],
-                [ 0, -X, -t ],
-                [ 0, X, -t ],
-                [ t, 0, -X ],
-                [ t, 0, X ],
-                [ -t, 0, -X ],
-                [ -t, 0, X ]
-            ],
-
-            indices: [
-                [ 0, 11, 5 ],
-                [ 0, 5, 1 ],
-                [ 0, 1, 7 ],
-                [ 0, 7, 10 ],
-                [ 0, 10, 11 ],
-                [ 1, 5, 9 ],
-                [ 5, 11, 4 ],
-                [ 11, 10, 2 ],
-                [ 10, 7, 6 ],
-                [ 7, 1, 8 ],
-                [ 3, 9, 4 ],
-                [ 3, 4, 2 ],
-                [ 3, 2, 6 ],
-                [ 3, 6, 8 ],
-                [ 3, 8, 9 ],
-                [ 4, 9, 5 ],
-                [ 2, 4, 11 ],
-                [ 6, 2, 10 ],
-                [ 8, 6, 7 ],
-                [ 9, 8, 1 ]
-            ]
+          vertices,
+          indices
         };
     };
 
+    let roundSphere = (vertices, indices, roundness) => {
+        let newIndices = [];
+        let i1 = 12, i2 = 13, i3 = 14;
+        for (let i = 0; i < roundness; i++) {
+            for (let face = 0; face < indices.length; face++){
+                let v1 = vertices[indices[face][0]];
+                let v2 = vertices[indices[face][1]];
+                let v3 = vertices[indices[face][2]];
+
+                let newV1 = getMiddlePoint(v1, v2);
+                let newV2 = getMiddlePoint(v2, v3);
+                let newV3 = getMiddlePoint(v3, v1);
+
+                vertices.push(newV1);
+                vertices.push(newV2);
+                vertices.push(newV3);
+
+                newIndices.push([indices[face][0], i1, i3]);
+                newIndices.push([indices[face][1], i2, i1]);
+                newIndices.push([indices[face][2], i3, i2]);
+                newIndices.push([i1, i2, i3]);
+            }
+            i1 += 3;
+            i2 += 3;
+            i3 += 3;
+        }
+        return newIndices;
+    }
+
+    let getMiddlePoint = (v1, v2) => {
+        let middle = [
+            (v1[0] + v2[0]) / 2.0,
+            (v1[1] + v2[1]) / 2.0,
+            (v1[2] + v2[2]) / 2.0
+        ];
+
+        let length = Math.sqrt(middle[0] * middle[0] + middle[1] * middle[1] + middle[2] * middle[2]);
+        middle = [ middle[0] / length, middle[1] / length, middle[2] / length ];
+
+        return middle;
+    }
+
+    console.log(sphere());
 
 
     let icosahedron = () => {
@@ -181,7 +236,7 @@
     };
 
     window.Shapes = {
-        icosahedronVertices,
+        sphere,
         cube,
         icosahedron,
         toRawTriangleArray,

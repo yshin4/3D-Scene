@@ -182,8 +182,8 @@
 
         {
             color: { r: 0.0, g: 0.7, b: 0.8 },
-            vertices: Shapes.toRawLineArray(Shapes.icosahedronVertices()),
-            mode: gl.LINES
+            vertices: Shapes.toRawTriangleArray(Shapes.sphere(1)),
+            mode: gl.TRIANGLES
         }
 
         // {
