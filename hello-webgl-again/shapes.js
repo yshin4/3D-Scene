@@ -44,10 +44,9 @@
     };
 
     let sphere = (roundness) => {
-        roundness = roundness || 1;
-        const scale = 1/2;
-        const X = 1 * scale;
-        const t = ((1.0 + Math.sqrt(5.0)) / 2) * scale;
+        roundness = roundness > 1 ? roundness : 1;
+        const X = 1
+        const t = (1.0 + Math.sqrt(5.0)) / 2;
 
         let vertices = [
             [ -X, t, 0 ],
@@ -65,6 +64,11 @@
             [ -t, 0, -X ],
             [ -t, 0, X ]
         ];
+
+        vertices = vertices.map( (v) => {
+            let length = Math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+            return [v[0] / length, v[1] / length, v[2] / length];
+        });
 
         let indices = [
             [ 0, 11, 5 ],
@@ -93,17 +97,19 @@
         ];
 
         indices = roundSphere(vertices, indices, roundness);
-
+        //console.log(vertices, indices);
         return {
           vertices,
           indices
         };
     };
 
+
     let roundSphere = (vertices, indices, roundness) => {
         let newIndices = [];
-        let i1 = 12, i2 = 13, i3 = 14;
+        let i1 = vertices.length, i2 = i1 + 1, i3 = i2 + 1;
         for (let i = 0; i < roundness; i++) {
+            newIndices = [];
             for (let face = 0; face < indices.length; face++){
                 let v1 = vertices[indices[face][0]];
                 let v2 = vertices[indices[face][1]];
@@ -121,10 +127,12 @@
                 newIndices.push([indices[face][1], i2, i1]);
                 newIndices.push([indices[face][2], i3, i2]);
                 newIndices.push([i1, i2, i3]);
+
+                i1 += 3;
+                i2 += 3;
+                i3 += 3;
             }
-            i1 += 3;
-            i2 += 3;
-            i3 += 3;
+            indices = newIndices;
         }
         return newIndices;
     }
@@ -141,8 +149,6 @@
 
         return middle;
     }
-
-    console.log(sphere());
 
 
     let icosahedron = () => {
@@ -197,7 +203,6 @@
      */
     let toRawTriangleArray = (indexedVertices) => {
         let result = [];
-
         for (let i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
             for (let j = 0, maxj = indexedVertices.indices[i].length; j < maxj; j += 1) {
                 result = result.concat(
@@ -217,7 +222,6 @@
      */
     let toRawLineArray = (indexedVertices) => {
         let result = [];
-
         for (let i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
             for (let j = 0, maxj = indexedVertices.indices[i].length; j < maxj; j += 1) {
                 result = result.concat(
