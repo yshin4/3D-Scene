@@ -1,7 +1,7 @@
 (() => {
 
     let pyramid = () => {
-        let vertices: [
+        let vertices = [
             [ 0, 0.5, 0 ],
             [ -0.5, -0.5, 0.5 ],
             [ 0.5, -0.5, 0.5 ],
@@ -9,7 +9,7 @@
             [ -0.5, -0.5, -0.5 ]
         ];
 
-        let indices: [
+        let indices = [
             [ 0, 1, 2 ],
             [ 0, 2, 3 ],
             [ 0, 3, 4 ],
@@ -27,7 +27,7 @@
         const y = 0.5;
         const z = 0.5;
 
-        let vertices: [
+        let vertices = [
             [ -x, y, -z ],
             [ -x, -y, -z ],
             [ x, -y, -z ],
@@ -38,7 +38,7 @@
             [ x, y, z ]
         ];
 
-        let indices: [
+        let indices = [
             [ 0, 1, 2 ],
             [ 0, 3, 2 ],
             [ 3, 2, 6 ],
@@ -250,7 +250,7 @@
         const X = 0.525731112119133606;
         const Z = 0.850650808352039932;
 
-        let vertices: [
+        let vertices = [
             [ -X, 0.0, Z ],
             [ X, 0.0, Z ],
             [ -X, 0.0, -Z ],
@@ -265,7 +265,7 @@
             [ -Z, -X, 0.0 ]
         ];
 
-        let indices: [
+        let indices = [
             [ 1, 4, 0 ],
             [ 4, 9, 0 ],
             [ 4, 5, 9 ],
@@ -287,7 +287,7 @@
             [ 5, 2, 9 ],
             [ 11, 2, 7 ]
         ];
-        
+
         return new Mesh(vertices, indices);
     };
 

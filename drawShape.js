@@ -1,16 +1,10 @@
-class drawShape {
-    let canvas;
-    let gl;
-    let objectArray;
+class DrawShape {
 
-    constructor(objectArray){
-        canvas = document.getElementById("3Dscene");
-        setup();
-        objectArray = objectArray;
-        animate();
+    constructor(){
+        this.canvas = document.getElementById("scene");
     }
 
-    let getRotationMatrix = (angle, x, y, z) => {
+    getRotationMatrix (angle, x, y, z) {
         // In production code, this function should be associated
         // with a matrix object with associated functions.
         let axisLength = Math.sqrt((x * x) + (y * y) + (z * z));
@@ -59,8 +53,8 @@ class drawShape {
         ];
     };
 
-    let setup = () => {
-        let gl = GLSLUtilities.getGL(canvas);
+    setup(objectArray) {
+        let gl = GLSLUtilities.getGL(this.canvas);
         if (!gl) {
             alert("No WebGL context found...sorry.");
 
@@ -70,7 +64,7 @@ class drawShape {
 
         gl.enable(gl.DEPTH_TEST);
         gl.clearColor(0.0, 0.0, 0.0, 0.0);
-        gl.viewport(0, 0, canvas.width, canvas.height);
+        gl.viewport(0, 0, this.canvas.width, this.canvas.height);
 
         objectArray.forEach((objectToDraw) => {
             objectToDraw.buffer = GLSLUtilities.initVertexBuffer(gl, objectToDraw.vertices);
@@ -126,37 +120,32 @@ class drawShape {
         let vertexColor = gl.getAttribLocation(shaderProgram, "vertexColor");
         gl.enableVertexAttribArray(vertexColor);
         let rotationMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
-    };
 
-    let drawObject = (object) => {
-        // Set the varying colors.
-        gl.bindBuffer(gl.ARRAY_BUFFER, object.colorBuffer);
-        gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
+        let drawObject = (object) => {
+            // Set the varying colors.
+            gl.bindBuffer(gl.ARRAY_BUFFER, object.colorBuffer);
+            gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
 
-        // Set the varying vertex coordinates.
-        gl.bindBuffer(gl.ARRAY_BUFFER, object.buffer);
-        gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
-        gl.drawArrays(object.mode, 0, object.vertices.length / 3);
-    };
+            // Set the varying vertex coordinates.
+            gl.bindBuffer(gl.ARRAY_BUFFER, object.buffer);
+            gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
+            gl.drawArrays(object.mode, 0, object.vertices.length / 3);
+        };
 
-    /*
-     * Displays the scene.
-     */
-    let drawScene = () => {
-        // Clear the display.
-        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+        let drawScene = () => {
+            // Clear the display.
+            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-        // Set up the rotation matrix.
-        gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(getRotationMatrix(currentRotation, 1, 1, 1)));
+            // Set up the rotation matrix.
+            gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(this.getRotationMatrix(currentRotation, 1, 1, 1)));
 
-        // Display the objects.
-        objectsToDraw.forEach(drawObject);
+            // Display the objects.
+            objectArray.forEach(drawObject);
 
-        // All done.
-        gl.flush();
-    };
+            // All done.
+            gl.flush();
+        };
 
-    let animate = () => {
         let animationActive = false;
         let currentRotation = 0.0;
         let previousTimestamp = null;
@@ -204,13 +193,13 @@ class drawShape {
         drawScene();
 
         // Set up the rotation toggle: clicking on the canvas does it.
-        $(canvas).click(() => {
+        $(this.canvas).click(() => {
             animationActive = !animationActive;
             if (animationActive) {
                 previousTimestamp = null;
                 window.requestAnimationFrame(advanceScene);
             }
         });
+    };
 
-    }
 }

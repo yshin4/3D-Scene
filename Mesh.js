@@ -1,13 +1,11 @@
 class Mesh {
-    let vertices;
-    let indices;
 
-    constructor (v, i) {
+    constructor(v, i) {
         this.vertices = v;
         this.indices = i;
     }
 
-    let toRawLineArray = (indexedVertices) => {
+    toRawLineArray(indexedVertices) {
         let result = [];
         for (let i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
             for (let j = 0, maxj = indexedVertices.indices[i].length; j < maxj; j += 1) {
@@ -26,7 +24,7 @@ class Mesh {
         return result;
     };
 
-    let toRawTriangleArray = (indexedVertices) => {
+    toRawTriangleArray(indexedVertices) {
         let result = [];
         for (let i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
             for (let j = 0, maxj = indexedVertices.indices[i].length; j < maxj; j += 1) {
