@@ -1,15 +1,16 @@
 class Objecto {
-    let shape;
-    let color;
-    let fill;
     let refine;
     let mesh;
 
     constructor (s, c, f, r){
-        refine = r || 1;
-        shape = getShape[s] || new Mesh (s.vertices, s.indices);
-        color = getColor[c] || { r: 1.0, g: 1.0, b: 1.0 };
-        fill = f;
+        this.canvas = document.getElementById("scene");
+        this.gl = GLSLUtilities.getGL(this.canvas);
+        this.refine = r || 1;
+        this.shape = getShape[s] || new Mesh (s.vertices, s.indices);
+        this.color = getColor[c] || { r: 1.0, g: 1.0, b: 1.0 };
+        this.mode = f ? gl.TRIANGLES : gl.LINES;
+        let shape = this.shape;
+        this.vertices = f ? shape.toRawTriangleArray(shape) : shape.toRawLineArray(shape);
     }
 
     let getShape = {

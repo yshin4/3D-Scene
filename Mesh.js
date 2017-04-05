@@ -1,10 +1,10 @@
 class Mesh {
     let vertices;
     let indices;
-    
+
     constructor (v, i) {
-        vertices = v;
-        indices = i;
+        this.vertices = v;
+        this.indices = i;
     }
 
     let toRawLineArray = (indexedVertices) => {
