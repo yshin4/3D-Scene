@@ -6,13 +6,25 @@
     let cube = new Objecto("cube", "green", false);
 
     let matrixArray = [
-        [1, 2, 3, 4],
-        [5, 6, 7, 8],
-        [9, 10, 11, 12],
-        [13, 14, 15, 16]
+        [5, 2, 6, 1],
+        [0, 6, 2, 0],
+        [3, 8, 1, 4],
+        [1, 8, 5, 6]
     ]
-    
-    let matrix1 = new Matrix(matrixArray);
+
+    let matrixArray2 = [
+        [7, 5, 8, 0],
+        [1, 8, 2, 6],
+        [9, 4, 3, 8],
+        [5, 3, 7, 9]
+    ]
+
+    let m1 = new Matrix(matrixArray);
+    let m2 = new Matrix(matrixArray2);
+    m1.print();
+    let m3 = new Matrix(m1.multiply(m2));
+    console.log("new ");
+    m3.print();
 
 
     let objectArray = [];
