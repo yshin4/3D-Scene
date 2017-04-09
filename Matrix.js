@@ -10,11 +10,93 @@ class Matrix {
         this.matrixArray = matrixArray || identityMatrix;
     }
 
+    translate (x, y, z){
+        let translationMatrix = [
+            [1, 0, 0, 0],
+            [0, 1, 0, 0],
+            [0, 0, 1, 0],
+            [x, y, z, 1]
+        ];
+
+        this.matrixArray = this.multiply(translationMatrix);
+    }
+
+    scale (s){
+        let scaleMatrix = [
+            [s, 0, 0, 0],
+            [0, s, 0, 0],
+            [0, 0, s, 0],
+            [0, 0, 0, 1]
+        ];
+
+        this.matrixArray = this.multiply(scaleMatrix);
+    }
+
+    rotate (angle, x, y, z){
+        let rotationMatrix = rotationMatrix(angle, x, y, z)
+        this.matrixArray = this.multiply(rotationMatrix);
+    }
+
+    rotationMatrix (angle, x, y, z) {
+        // In production code, this function should be associated
+        // with a matrix object with associated functions.
+        let axisLength = Math.sqrt((x * x) + (y * y) + (z * z));
+        let s = Math.sin(angle * Math.PI / 180.0);
+        let c = Math.cos(angle * Math.PI / 180.0);
+        let oneMinusC = 1.0 - c;
+
+        // Normalize the axis vector of rotation.
+        x /= axisLength;
+        y /= axisLength;
+        z /= axisLength;
+
+        // Now we can calculate the other terms.
+        // "2" for "squared."
+        let x2 = x * x;
+        let y2 = y * y;
+        let z2 = z * z;
+        let xy = x * y;
+        let yz = y * z;
+        let xz = x * z;
+        let xs = x * s;
+        let ys = y * s;
+        let zs = z * s;
+
+        // GL expects its matrices in column major order.
+        return [
+            (x2 * oneMinusC) + c,
+            (xy * oneMinusC) + zs,
+            (xz * oneMinusC) - ys,
+            0.0,
+
+            (xy * oneMinusC) - zs,
+            (y2 * oneMinusC) + c,
+            (yz * oneMinusC) + xs,
+            0.0,
+
+            (xz * oneMinusC) + ys,
+            (yz * oneMinusC) - xs,
+            (z2 * oneMinusC) + c,
+            0.0,
+
+            0.0,
+            0.0,
+            0.0,
+            1.0
+        ];
+    };
+
+
     print(){
         let m1 = this.matrixArray;
         for (let m of m1){
             console.log(m);
         }
+    }
+
+    getRawArray(){
+        let m1 = this.matrixArray;
+        return m1[0].concat(m1[1].concat(m1[2].concat(m1[3])));
     }
 
     multiply(m2){

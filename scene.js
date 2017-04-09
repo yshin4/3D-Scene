@@ -1,6 +1,10 @@
 (() => {
 
     let sphere = new Objecto("sphere", "blue", false);
+
+    let sphereMatrix = new Matrix();
+    sphereMatrix.matrixArray = m.translate(3, 0, 0);
+
     let icosahedron = new Objecto("icosahedron", "yellow", false);
     let pyramid = new Objecto("pyramid", "red", false);
     let cube = new Objecto("cube", "green", false);
@@ -27,18 +31,15 @@
     ];
 
     let m = new Matrix();
-    console.log("m");
-    m.print();
+    m.matrixArray = m.translate(1,0,0);
+    m.matrixArray = m.scale(1);
+
 
     let m1 = new Matrix(matrixArray);
     let m2 = new Matrix(matrixArray2);
     let m3 = new Matrix(matrixArray3);
     let m4 = new Matrix(m1.multiply(m2));
     let m5 = new Matrix(m1.multiply(m3));
-    console.log("m4");
-    m4.print();
-    console.log("m5");
-    m5.print();
 
     let objectArray = [];
     objectArray.push(sphere);

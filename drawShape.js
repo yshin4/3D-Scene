@@ -135,7 +135,6 @@ class DrawShape {
         let drawScene = () => {
             // Clear the display.
             gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-
             // Set up the rotation matrix.
             gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(this.getRotationMatrix(currentRotation, 1, 1, 1)));
 
