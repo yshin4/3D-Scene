@@ -107,7 +107,11 @@ class Matrix {
 
     getRawArray(){
         let m1 = this.matrixArray;
-        return m1[0].concat(m1[1].concat(m1[2].concat(m1[3])));
+        let newArray = [];
+        for (let i in m1){
+            newArray = newArray.concat(m1[i]);
+        }
+        return newArray;
     }
 
     multiply(m2){
