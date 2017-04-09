@@ -17,23 +17,24 @@ class Matrix {
             [0, 0, 1, 0],
             [x, y, z, 1]
         ];
-
+        translationMatrix = new Matrix(translationMatrix);
         this.matrixArray = this.multiply(translationMatrix);
     }
 
-    scale (s){
+    scale (x, y, z){
         let scaleMatrix = [
-            [s, 0, 0, 0],
-            [0, s, 0, 0],
-            [0, 0, s, 0],
+            [x, 0, 0, 0],
+            [0, y, 0, 0],
+            [0, 0, z, 0],
             [0, 0, 0, 1]
         ];
-
+        scaleMatrix = new Matrix(scaleMatrix);
         this.matrixArray = this.multiply(scaleMatrix);
     }
 
     rotate (angle, x, y, z){
-        let rotationMatrix = rotationMatrix(angle, x, y, z)
+        let rotationMatrix = this.rotationMatrix(angle, x, y, z);
+        rotationMatrix = new Matrix(rotationMatrix);
         this.matrixArray = this.multiply(rotationMatrix);
     }
 
@@ -50,6 +51,16 @@ class Matrix {
         y /= axisLength;
         z /= axisLength;
 
+        if ( isNaN(x) === true){
+           x = 0;
+        }
+        if ( isNaN(y) === true){
+           y = 0;
+        }
+        if ( isNaN(z) === true){
+           z = 0;
+        }
+
         // Now we can calculate the other terms.
         // "2" for "squared."
         let x2 = x * x;
@@ -64,25 +75,25 @@ class Matrix {
 
         // GL expects its matrices in column major order.
         return [
-            (x2 * oneMinusC) + c,
+            [(x2 * oneMinusC) + c,
             (xy * oneMinusC) + zs,
             (xz * oneMinusC) - ys,
-            0.0,
+            0.0],
 
-            (xy * oneMinusC) - zs,
+            [(xy * oneMinusC) - zs,
             (y2 * oneMinusC) + c,
             (yz * oneMinusC) + xs,
-            0.0,
+            0.0],
 
-            (xz * oneMinusC) + ys,
+            [(xz * oneMinusC) + ys,
             (yz * oneMinusC) - xs,
             (z2 * oneMinusC) + c,
-            0.0,
+            0.0],
 
+            [0.0,
             0.0,
             0.0,
-            0.0,
-            1.0
+            1.0]
         ];
     };
 
@@ -105,7 +116,7 @@ class Matrix {
         let m3 = [];
         for (let i = 0; i < m1[0].length; i++){
             m3[i] = [];
-            for (let j = 0; j < m2[0].length; j++){
+              for (let j = 0; j < m2[0].length; j++){
                 m3[i][j] = m1[i][0] * m2[0][j] +
                            m1[i][1] * m2[1][j] +
                            m1[i][2] * m2[2][j] +

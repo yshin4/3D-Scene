@@ -22,10 +22,32 @@ class Objecto {
             black: { r: 1.0, g: 1.0, b: 1.0 },
             grey: { r: 0.8, g: 0.9, b: 0.9 }
         };
+        this.fill = f;
         this.shape = getShape[s] || new Mesh (s.vertices, s.indices);
         this.color = getColor[c] || { r: 1.0, g: 1.0, b: 1.0 };
         this.mode = f ? this.gl.TRIANGLES : this.gl.LINES;
         let shape = this.shape;
         this.vertices = f ? shape.toRawTriangleArray(shape) : shape.toRawLineArray(shape);
     };
+
+    transformVertices(matrix){
+        let vertexArray = this.shape.vertices;
+        for (let i = 0; i < this.shape.vertices.length; i++){
+            let v = vertexArray[i];
+            let vertexMatrix = new Matrix ([
+                [v[0]],
+                [v[1]],
+                [v[2]],
+                [1]
+            ]);
+            let newMatrix = matrix.multiply(vertexMatrix);
+            console.log("before", v[2]);
+            console.log("new ", newMatrix[2][0])
+            v[0] = newMatrix[0][0];
+            v[1] = newMatrix[1][0];
+            v[2] = newMatrix[2][0];
+            // console.log("after", v[0]);
+        }
+        this.vertices = this.fill ? this.shape.toRawTriangleArray(this.shape) : this.shape.toRawLineArray(this.shape);
+    }
 }
