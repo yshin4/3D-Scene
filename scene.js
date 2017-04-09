@@ -6,12 +6,16 @@
     let cube = new Objecto("cube", "green", false);
 
     let cubeMatrix = new Matrix();
-    cubeMatrix.translate(3, 0, 0);
-    cubeMatrix.scale(1, 1, 1);
+    cubeMatrix.translate(0, 0.3, 0);
+    cubeMatrix.scale(1, 0.3, 1);
     cubeMatrix.rotate(0, 0, 0, 0);
-    console.log(cube.shape.vertices);
     cube.transformVertices(cubeMatrix);
-    console.log(cube.shape.vertices);
+
+    let sphereMatrix = new Matrix();
+    sphereMatrix.translate(0.5, 0, 0);
+    sphereMatrix.scale(1, 1, 1);
+    sphereMatrix.rotate(0, 0, 0, 0);
+    sphere.transformVertices(sphereMatrix);
 
 
     // let matrixArray = [
@@ -43,7 +47,7 @@
     // let m5 = new Matrix(m1.multiply(m3));
 
     let objectArray = [];
-    //objectArray.push(sphere);
+    objectArray.push(sphere);
     // objectArray.push(pyramid);
      objectArray.push(cube);
     // objectArray.push(icosahedron);

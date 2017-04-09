@@ -41,12 +41,9 @@ class Objecto {
                 [1]
             ]);
             let newMatrix = matrix.multiply(vertexMatrix);
-            console.log("before", v[2]);
-            console.log("new ", newMatrix[2][0])
             v[0] = newMatrix[0][0];
             v[1] = newMatrix[1][0];
             v[2] = newMatrix[2][0];
-            // console.log("after", v[0]);
         }
         this.vertices = this.fill ? this.shape.toRawTriangleArray(this.shape) : this.shape.toRawLineArray(this.shape);
     }

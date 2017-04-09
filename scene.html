@@ -46,7 +46,8 @@
       uniform mat4 testMatrix;
 
       void main(void) {
-          gl_Position = rotationMatrix * vec4(vertexPosition, 1.0);
+          //gl_Position = rotationMatrix * vec4(vertexPosition, 1.0);
+          gl_Position = vec4(vertexPosition, 1.0);
           finalVertexColor = vec4(vertexColor, 1.0);
       }
     </script>
