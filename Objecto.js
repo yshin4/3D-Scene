@@ -1,6 +1,7 @@
 class Objecto {
 
     constructor (s, c, f, r){
+        this.shapeName = s;
         this.canvas = document.getElementById("scene");
         this.gl = GLSLUtilities.getGL(this.canvas);
         this.refine = r || 1;
@@ -16,7 +17,7 @@ class Objecto {
             red: { r: 1.0, g: 0.0, b: 0.0 },
             blue: { r: 0.0, g: 0.0, b: 1.0 },
             green: { r: 0.0, g: 1.0, b: 0.0 },
-            yellow: { r: 0.7, g: 0.7, b: 0.0 },
+            yellow: { r: 1.0, g: 1.0, b: 0.3 },
             cyan: { r: 0.0, g: 0.7, b: 0.8 },
             purple: { r: 0.7, g: 0.0, b: 0.7 },
             black: { r: 1.0, g: 1.0, b: 1.0 },
@@ -28,6 +29,7 @@ class Objecto {
         this.mode = f ? this.gl.TRIANGLES : this.gl.LINES;
         let shape = this.shape;
         this.vertices = f ? shape.toRawTriangleArray(shape) : shape.toRawLineArray(shape);
+        this.matrx;
         this.child = [];
     };
 
@@ -47,5 +49,10 @@ class Objecto {
             v[2] = newMatrix[2][0];
         }
         this.vertices = this.fill ? this.shape.toRawTriangleArray(this.shape) : this.shape.toRawLineArray(this.shape);
+
+        for (let c of this.child){
+            let childMatrix = new Matrix(c.matrix.multiply(matrix));
+            c.transformVertices(childMatrix);
+        }
     }
 }
