@@ -6,7 +6,7 @@
     let cube = new Objecto("cube", "green", false);
 
     let cubeMatrix = new Matrix();
-    cubeMatrix.translate(4, 0.4, 0);
+    cubeMatrix.translate(1, 0.4, 0);
     cubeMatrix.scale(0.5, 0.5, 0.5);
     cubeMatrix.rotate(0, 0, 0, 0);
     cube.transformVertices(cubeMatrix);
@@ -16,6 +16,12 @@
     sphereMatrix.scale(0.3, 0.3, 0.3);
     sphereMatrix.rotate(0, 0, 0, 0);
     sphere.transformVertices(sphereMatrix);
+
+    let pyramidMatrix = new Matrix();
+    pyramidMatrix.translate(-0.4, 0.4, 0);
+    pyramidMatrix.scale(0.5, 0.5, 0.5);
+    pyramidMatrix.rotate(120, 1, 0, 0);
+    pyramid.transformVertices(pyramidMatrix);
 
 
     // let matrixArray = [
@@ -48,7 +54,7 @@
 
     let objectArray = [];
     objectArray.push(sphere);
-    // objectArray.push(pyramid);
+    objectArray.push(pyramid);
     objectArray.push(cube);
     // objectArray.push(icosahedron);
     let drawShape = new DrawShape();
