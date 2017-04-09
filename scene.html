@@ -8,7 +8,7 @@
   <body>
     <h1>3DScene!</h1>
 
-    <canvas id="scene" width="512" height="512">
+    <canvas id="scene" width="1024" height="1024">
       Sorry, your web browser does not appear to support
       the <code>canvas</code> element, either.
     </canvas>
@@ -43,11 +43,13 @@
       attribute vec3 vertexColor;
       varying vec4 finalVertexColor;
       uniform mat4 rotationMatrix;
-      uniform mat4 testMatrix;
+      uniform mat4 projectionMatrix;
+      uniform mat4 modelViewMatrix;
+
 
       void main(void) {
           //gl_Position = rotationMatrix * vec4(vertexPosition, 1.0);
-          gl_Position = vec4(vertexPosition, 1.0);
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(vertexPosition, 1.0);
           finalVertexColor = vec4(vertexColor, 1.0);
       }
     </script>

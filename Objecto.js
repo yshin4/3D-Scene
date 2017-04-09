@@ -28,6 +28,7 @@ class Objecto {
         this.mode = f ? this.gl.TRIANGLES : this.gl.LINES;
         let shape = this.shape;
         this.vertices = f ? shape.toRawTriangleArray(shape) : shape.toRawLineArray(shape);
+        this.child = [];
     };
 
     transformVertices(matrix){
