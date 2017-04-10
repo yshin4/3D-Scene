@@ -1,5 +1,5 @@
 (() => {
-    let Mesh = Mesh;
+    let Mesh = window.Mesh;
 
     let pyramid = () => {
         let vertices = [

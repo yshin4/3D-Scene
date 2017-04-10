@@ -1,8 +1,7 @@
 (() => {
 
-    let Objecto = Objecto;
-    let Matrix = Matrix;
-    let DrawShape = DrawShape;
+    let Matrix = window.Matrix;
+    let Objecto = window.Objecto;
 
     let sphere = new Objecto("sphere", "blue", false);
     // let icosahedron = new Objecto("icosahedron", "green", false);
@@ -53,7 +52,7 @@
     objectArray.push(pyramid2);
     objectArray.push(pyramid3);
     // objectArray.push(icosahedron);
-    let drawShape = new DrawShape();
+    let drawShape = new window.DrawShape();
     drawShape.setup(objectArray);
 
 })();
