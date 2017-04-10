@@ -1,7 +1,11 @@
 (() => {
 
+    let Objecto = Objecto;
+    let Matrix = Matrix;
+    let DrawShape = DrawShape;
+
     let sphere = new Objecto("sphere", "blue", false);
-    let icosahedron = new Objecto("icosahedron", "green", false);
+    // let icosahedron = new Objecto("icosahedron", "green", false);
     let pyramid = new Objecto("pyramid", "yellow", true);
     let pyramid2 = new Objecto("pyramid", "grey", false);
     let pyramid3 = new Objecto("pyramid", "cyan", true);

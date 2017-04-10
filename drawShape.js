@@ -7,7 +7,7 @@ class DrawShape {
     getRotationMatrix (angle, x, y, z) {
         // In production code, this function should be associated
         // with a matrix object with associated functions.
-        let axisLength = Math.sqrt((x * x) + (y * y) + (z * z));
+        let axisLength = Math.sqrt(x * x + y * y + z * z);
         let s = Math.sin(angle * Math.PI / 180.0);
         let c = Math.cos(angle * Math.PI / 180.0);
         let oneMinusC = 1.0 - c;
@@ -31,19 +31,19 @@ class DrawShape {
 
         // GL expects its matrices in column major order.
         return [
-            (x2 * oneMinusC) + c,
-            (xy * oneMinusC) + zs,
-            (xz * oneMinusC) - ys,
+            x2 * oneMinusC + c,
+            xy * oneMinusC + zs,
+            xz * oneMinusC - ys,
             0.0,
 
-            (xy * oneMinusC) - zs,
-            (y2 * oneMinusC) + c,
-            (yz * oneMinusC) + xs,
+            xy * oneMinusC - zs,
+            y2 * oneMinusC + c,
+            yz * oneMinusC + xs,
             0.0,
 
-            (xz * oneMinusC) + ys,
-            (yz * oneMinusC) - xs,
-            (z2 * oneMinusC) + c,
+            xz * oneMinusC + ys,
+            yz * oneMinusC - xs,
+            z2 * oneMinusC + c,
             0.0,
 
             0.0,
@@ -51,7 +51,7 @@ class DrawShape {
             0.0,
             1.0
         ];
-    };
+    }
 
     getOrthoMatrix (left, right, bottom, top, zNear, zFar){
         let width = right - left;
@@ -79,9 +79,11 @@ class DrawShape {
             -(zFar + zNear) / depth,
             1.0
         ];
-    };
+    }
 
     setup(objectArray) {
+        let $ = $;
+        let GLSLUtilities = GLSLUtilities;
         let gl = GLSLUtilities.getGL(this.canvas);
         if (!gl) {
             alert("No WebGL context found...sorry.");
@@ -157,11 +159,11 @@ class DrawShape {
             gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
 
             gl.uniformMatrix4fv(modelViewMatrix, gl.FALSE, new Float32Array(object.axis ?
-                getRotationMatrix(currentRotation, object.axis.x, object.axis.y, object.axis.z) :
-                [1, 0, 0, 0, // N.B. In a full-fledged matrix library, the identity
-                 0, 1, 0, 0, //      matrix should be available as a function.
-                 0, 0, 1, 0,
-                 0, 0, 0, 1]
+                this.getRotationMatrix(currentRotation, object.axis.x, object.axis.y, object.axis.z) :
+            [1, 0, 0, 0, // N.B. In a full-fledged matrix library, the identity
+                0, 1, 0, 0, //      matrix should be available as a function.
+                0, 0, 1, 0,
+                0, 0, 0, 1]
             ));
 
             // Set the varying vertex coordinates.
@@ -246,6 +248,6 @@ class DrawShape {
                 window.requestAnimationFrame(advanceScene);
             }
         });
-    };
+    }
 
 }

@@ -1,6 +1,10 @@
 class Objecto {
 
     constructor (s, c, f, r){
+        let GLSLUtilities = GLSLUtilities;
+        let MeshLibrary = MeshLibrary;
+        let Mesh = Mesh;
+
         this.shapeName = s;
         this.canvas = document.getElementById("scene");
         this.gl = GLSLUtilities.getGL(this.canvas);
@@ -24,20 +28,21 @@ class Objecto {
             grey: { r: 0.8, g: 0.9, b: 0.9 }
         };
         this.fill = f;
-        this.shape = getShape[s] || new Mesh (s.vertices, s.indices);
+        this.shape = getShape[s] || new Mesh(s.vertices, s.indices);
         this.color = getColor[c] || { r: 1.0, g: 1.0, b: 1.0 };
         this.mode = f ? this.gl.TRIANGLES : this.gl.LINES;
         let shape = this.shape;
         this.vertices = f ? shape.toRawTriangleArray(shape) : shape.toRawLineArray(shape);
         this.matrx;
         this.child = [];
-    };
+    }
 
     transformVertices(matrix){
+        let Matrix = Matrix;
         let vertexArray = this.shape.vertices;
         for (let i = 0; i < this.shape.vertices.length; i++){
             let v = vertexArray[i];
-            let vertexMatrix = new Matrix ([
+            let vertexMatrix = new Matrix([
                 [v[0]],
                 [v[1]],
                 [v[2]],

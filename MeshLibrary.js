@@ -1,4 +1,5 @@
 (() => {
+    let Mesh = Mesh;
 
     let pyramid = () => {
         let vertices = [
@@ -58,7 +59,7 @@
 
     let sphere = (roundness) => {
         roundness = roundness > 1 ? roundness : 1;
-        const X = 1
+        const X = 1;
         const t = (1.0 + Math.sqrt(5.0)) / 2;
 
         let vertices = [
@@ -78,7 +79,7 @@
             [ -t, 0, X ]
         ];
 
-        vertices = vertices.map( (v) => {
+        vertices = vertices.map((v) => {
             let length = Math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
             return [v[0] / length, v[1] / length, v[2] / length];
         });
@@ -145,7 +146,7 @@
             indices = newIndices;
         }
         return newIndices;
-    }
+    };
 
     let getMiddlePoint = (v1, v2) => {
 
@@ -159,13 +160,13 @@
         middle = [ middle[0] / length, middle[1] / length, middle[2] / length ];
 
         return middle;
-    }
+    };
 
     let crystal = (dull) => {
         dull = dull || 1;
-        const scale = 1/2;
+        const scale = 1 / 2;
         const X = 1 * scale;
-        const t = ((1.0 + Math.sqrt(5.0)) / 2) * scale;
+        const t = (1.0 + Math.sqrt(5.0)) / 2 * scale;
 
         let vertices = [
             [ -X, t, 0 ],
@@ -242,7 +243,7 @@
             i3 += 3;
         }
         return newIndices;
-    }
+    };
 
 
     let icosahedron = () => {

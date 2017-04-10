@@ -3,6 +3,7 @@
  * WebGL programs.
  */
 (() => {
+
     /*
      * Returns the WebGL rendering context.
      */
@@ -83,7 +84,7 @@
         }
 
         return null;
-    }
+    };
 
     window.GLSLUtilities = {
         getGL,

@@ -22,7 +22,7 @@ class Mesh {
         }
 
         return result;
-    };
+    }
 
     toRawTriangleArray(indexedVertices) {
         let result = [];
@@ -37,5 +37,5 @@ class Mesh {
         }
 
         return result;
-    };
+    }
 }

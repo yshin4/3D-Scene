@@ -1,5 +1,31 @@
 describe("Matrix implementation", () => {
+    let Matrix = Matrix;
     let matrix = new Matrix();
+
+    let ma1 = [
+        [5, 2, 6, 1],
+        [0, 6, 2, 0],
+        [3, 8, 1, 4],
+        [1, 8, 5, 6]
+    ];
+
+    let ma2 = [
+        [7, 5, 8, 0],
+        [1, 8, 2, 6],
+        [9, 4, 3, 8],
+        [5, 3, 7, 9]
+    ];
+
+    let ma3 = [
+        [7],
+        [5],
+        [8],
+        [0]
+    ];
+
+    let m1 = new Matrix(ma1);
+    let m2 = new Matrix(ma2);
+    let m3 = new Matrix(ma3);
 
     describe("initialization", () => {
         it("should initialize with identity matrix", () => {
@@ -12,7 +38,7 @@ describe("Matrix implementation", () => {
         });
 
         it("should initialize with given matrix", () => {
-          let m1 = new Matrix([
+            let m1 = new Matrix([
                 [5, 2, 6, 1],
                 [0, 6, 2, 0],
                 [3, 8, 1, 4],
@@ -90,31 +116,6 @@ describe("Matrix implementation", () => {
 
         });
 
-        let ma1 = [
-            [5, 2, 6, 1],
-            [0, 6, 2, 0],
-            [3, 8, 1, 4],
-            [1, 8, 5, 6]
-        ];
-
-        let ma2 = [
-            [7, 5, 8, 0],
-            [1, 8, 2, 6],
-            [9, 4, 3, 8],
-            [5, 3, 7, 9]
-        ];
-
-        let ma3 = [
-            [7],
-            [5],
-            [8],
-            [0]
-        ];
-
-        let m1 = new Matrix(ma1);
-        let m2 = new Matrix(ma2);
-        let m3 = new Matrix(ma3);
-
         it("should perform 4x4 times 4x4 multiplication", () => {
             expect(matrix.multiply(m1)).toBe([
                 [5, 2, 6, 1],
@@ -128,7 +129,7 @@ describe("Matrix implementation", () => {
                 [24, 56, 18, 52],
                 [58, 95, 71, 92],
                 [90, 107, 81, 142]
-            ])
+            ]);
         });
 
         it("should perform 4x4 times 1x4 multiplication", () => {
