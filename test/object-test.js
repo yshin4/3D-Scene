@@ -1,6 +1,7 @@
 describe("Object implementation", () => {
     let MeshLibrary = window.MeshLibrary;
     let Objecto = window.Objecto;
+    let Matrix = window.Matrix;
 
     beforeEach(() => {
         let fixture =
@@ -8,7 +9,7 @@ describe("Object implementation", () => {
               '<canvas id="scene" width="512" height="512"></canvas>' +
           '></div>';
 
-    document.body.insertAdjacentHTML(
+        document.body.insertAdjacentHTML(
         'afterbegin',
          fixture);
     });
@@ -25,13 +26,13 @@ describe("Object implementation", () => {
             expect(sphere.fill).toBe(true);
             let answer = MeshLibrary.sphere(3);
             for (let i = 0; i < answer.vertices.length; i++){
-                for(let j = 0; j < answer.vertices[0].length; j++){
-                  expect(sphere.shape.vertices[i][j]).toBe(answer.vertices[i][j]);
+                for (let j = 0; j < answer.vertices[0].length; j++){
+                    expect(sphere.shape.vertices[i][j]).toBe(answer.vertices[i][j]);
                 }
             }
             for (let i = 0; i < answer.indices.length; i++){
-                for(let j = 0; j < answer.indices[0].length; j++){
-                  expect(sphere.shape.indices[i][j]).toBe(answer.indices[i][j]);
+                for (let j = 0; j < answer.indices[0].length; j++){
+                    expect(sphere.shape.indices[i][j]).toBe(answer.indices[i][j]);
                 }
             }
             expect(sphere.color.r).toBe(10);
@@ -42,13 +43,13 @@ describe("Object implementation", () => {
             expect(icosahedron.fill).toBe(false);
             let answer2 = MeshLibrary.icosahedron();
             for (let i = 0; i < answer2.vertices.length; i++){
-                for(let j = 0; j < answer2.vertices[0].length; j++){
-                  expect(icosahedron.shape.vertices[i][j]).toBe(answer2.vertices[i][j]);
+                for (let j = 0; j < answer2.vertices[0].length; j++){
+                    expect(icosahedron.shape.vertices[i][j]).toBe(answer2.vertices[i][j]);
                 }
             }
             for (let i = 0; i < answer2.indices.length; i++){
-                for(let j = 0; j < answer2.indices[0].length; j++){
-                  expect(icosahedron.shape.indices[i][j]).toBe(answer2.indices[i][j]);
+                for (let j = 0; j < answer2.indices[0].length; j++){
+                    expect(icosahedron.shape.indices[i][j]).toBe(answer2.indices[i][j]);
                 }
             }
             expect(icosahedron.color.r).toBe(1);
@@ -64,8 +65,8 @@ describe("Object implementation", () => {
             cubeMatrix.rotate(30, 1, 1, 0);
             cube.matrix = cubeMatrix;
             for (let i = 0; i < cubeMatrix.length; i++){
-                for(let j = 0; j < cubeMatrix[0].length; j++){
-                  expect(cube.matrix[i][j]).toBe(cubeMatrix[i][j]);
+                for (let j = 0; j < cubeMatrix[0].length; j++){
+                    expect(cube.matrix[i][j]).toBe(cubeMatrix[i][j]);
                 }
             }
         });
@@ -96,8 +97,8 @@ describe("Object implementation", () => {
             ];
 
             for (let i = 0; i < answer.length; i++){
-                for(let j = 0; j < answer[0].length; j++){
-                  expect(cube.matrix.matrixArray[i][j]).toBe(answer[i][j]);
+                for (let j = 0; j < answer[0].length; j++){
+                    expect(cube.matrix.matrixArray[i][j]).toBe(answer[i][j]);
                 }
             }
 
@@ -123,7 +124,7 @@ describe("Object implementation", () => {
                 1.1616116523516815, 0.43838834764831835, 0.21650635094610968,
             ];
             cube.transformVertices(cubeMatrix);
-            for(let i = 0; i < answer2.length; i++){
+            for (let i = 0; i < answer2.length; i++){
                 expect(cube.vertices[i]).toBe(answer2[i]);
             }
         });

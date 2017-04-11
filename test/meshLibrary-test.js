@@ -25,12 +25,12 @@ describe("MeshLibrary implementation", () => {
             let pyramidMesh = MeshLibrary.pyramid();
 
             for (let i = 0; i < pyramid.vertices.length; i++){
-                for(let j = 0; j < pyramid.vertices[0].length; j++){
+                for (let j = 0; j < pyramid.vertices[0].length; j++){
                     expect(pyramidMesh.vertices[i][j]).toBe(pyramid.vertices[i][j]);
                 }
             }
             for (let i = 0; i < pyramid.indices.length; i++){
-                for(let j = 0; j < pyramid.indices[0].length; j++){
+                for (let j = 0; j < pyramid.indices[0].length; j++){
                     expect(pyramidMesh.indices[i][j]).toBe(pyramid.indices[i][j]);
                 }
             }

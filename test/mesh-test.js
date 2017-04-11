@@ -24,12 +24,12 @@ describe("Mesh implementation", () => {
 
             let pyramidMesh = new Mesh(pyramid.vertices, pyramid.indices);
             for (let i = 0; i < pyramid.vertices.length; i++){
-                for(let j = 0; j < pyramid.vertices[0].length; j++){
+                for (let j = 0; j < pyramid.vertices[0].length; j++){
                     expect(pyramidMesh.vertices[i][j]).toBe(pyramid.vertices[i][j]);
                 }
             }
             for (let i = 0; i < pyramid.indices.length; i++){
-                for(let j = 0; j < pyramid.indices[0].length; j++){
+                for (let j = 0; j < pyramid.indices[0].length; j++){
                     expect(pyramidMesh.indices[i][j]).toBe(pyramid.indices[i][j]);
                 }
             }
@@ -53,14 +53,14 @@ describe("Mesh implementation", () => {
             let testTriangleArray = testMesh.toRawTriangleArray(testMesh);
             let answer = [0, 0.5, 0, -0.5, -0.5, 0.5, 0, 0.5, 0];
             expect(testTriangleArray.length).toBe(9);
-            for(let i = 0; i < answer.length; i++){
+            for (let i = 0; i < answer.length; i++){
                 expect(testTriangleArray[i]).toBe(answer[i]);
             }
 
             let testLineArray = testMesh.toRawLineArray(testMesh);
             let answer2 = [0, 0.5, 0, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0, 0.5, 0, 0, 0.5, 0, 0, 0.5, 0];
             expect(testLineArray.length).toBe(18);
-            for(let i = 0; i < answer2.length; i++){
+            for (let i = 0; i < answer2.length; i++){
                 expect(testLineArray[i]).toBe(answer2[i]);
             }
         });

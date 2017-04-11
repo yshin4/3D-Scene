@@ -42,7 +42,6 @@
         transformVertices(matrix){
             let Matrix = window.Matrix;
             let vertexArray = this.shape.vertices;
-            let newMatrix;
             for (let i = 0; i < this.shape.vertices.length; i++){
                 let v = vertexArray[i];
                 let vertexMatrix = new Matrix([

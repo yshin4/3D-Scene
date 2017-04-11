@@ -89,24 +89,24 @@
             let depth = zFar - zNear;
 
             return [
-                (2 * zNear) / width,
+                2 * zNear / width,
                 0,
                 0,
                 0,
 
                 0,
-                (2 * zNear) / height,
+                2 * zNear / height,
                 0,
                 0,
 
                 (right + left) / width,
                 (top + bottom) / height,
-                -(zFar + zNear)/ depth,
+                -(zFar + zNear) / depth,
                 -1,
 
                 0,
                 0,
-                (-2 * zNear * zFar) / depth,
+                -2 * zNear * zFar / depth,
                 0
             ];
         }

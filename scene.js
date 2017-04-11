@@ -73,10 +73,10 @@
     objectArray.push(pyramid2);
     objectArray.push(pyramid3);
 
-    // objectArray.push(body);
-    // objectArray.push(leftArm);
-    // objectArray.push(leftArmStroke);
-    // objectArray.push(leftFoot);
+    objectArray.push(body);
+    objectArray.push(leftArm);
+    objectArray.push(leftArmStroke);
+    objectArray.push(leftFoot);
     let drawShape = new window.DrawShape();
     drawShape.setup(objectArray);
 

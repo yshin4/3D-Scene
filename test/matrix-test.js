@@ -29,18 +29,18 @@ describe("Matrix implementation", () => {
 
     describe("initialization", () => {
         it("should initialize with identity matrix", () => {
-          let identityMatrix = new Matrix([
-            [ 1, 0, 0, 0 ],
-            [ 0, 1, 0, 0 ],
-            [ 0, 0, 1, 0 ],
-            [ 0, 0, 0, 1 ]
-          ]);
+            let identityMatrix = new Matrix([
+              [ 1, 0, 0, 0 ],
+              [ 0, 1, 0, 0 ],
+              [ 0, 0, 1, 0 ],
+              [ 0, 0, 0, 1 ]
+            ]);
 
-          for (let i = 0; i < matrix.length; i++){
-              for(let j = 0; j < matrix[0].length; j++){
-                expect(matrix[i][j]).toBe(identityMatrix[i][j]);
-              }
-          }
+            for (let i = 0; i < matrix.length; i++){
+                for (let j = 0; j < matrix[0].length; j++){
+                    expect(matrix[i][j]).toBe(identityMatrix[i][j]);
+                }
+            }
         });
 
         it("should initialize with given matrix", () => {
@@ -59,8 +59,8 @@ describe("Matrix implementation", () => {
             ];
 
             for (let i = 0; i < answer.length; i++){
-                for(let j = 0; j < answer[0].length; j++){
-                  expect(answer[i][j]).toBe(m1.matrixArray[i][j]);
+                for (let j = 0; j < answer[0].length; j++){
+                    expect(answer[i][j]).toBe(m1.matrixArray[i][j]);
                 }
             }
         });
@@ -77,8 +77,8 @@ describe("Matrix implementation", () => {
                 [0, 0, 0, 1]
             ];
             for (let i = 0; i < answer.length; i++){
-                for(let j = 0; j < answer[0].length; j++){
-                  expect(answer[i][j]).toBe(translateMatrix.matrixArray[i][j]);
+                for (let j = 0; j < answer[0].length; j++){
+                    expect(answer[i][j]).toBe(translateMatrix.matrixArray[i][j]);
                 }
             }
         });
@@ -93,8 +93,8 @@ describe("Matrix implementation", () => {
                 [0, 0, 0, 1]
             ];
             for (let i = 0; i < answer.length; i++){
-                for(let j = 0; j < answer[0].length; j++){
-                  expect(answer[i][j]).toBe(scaleMatrix.matrixArray[i][j]);
+                for (let j = 0; j < answer[0].length; j++){
+                    expect(answer[i][j]).toBe(scaleMatrix.matrixArray[i][j]);
                 }
             }
         });
@@ -109,8 +109,8 @@ describe("Matrix implementation", () => {
                 [0, 0, 0, 1]
             ];
             for (let i = 0; i < answer.length; i++){
-                for(let j = 0; j < answer[0].length; j++){
-                  expect(parseFloat(answer[i][j]).toFixed(3)).toBe(parseFloat(rotateMatrix.matrixArray[i][j]).toFixed(3));
+                for (let j = 0; j < answer[0].length; j++){
+                    expect(parseFloat(answer[i][j]).toFixed(3)).toBe(parseFloat(rotateMatrix.matrixArray[i][j]).toFixed(3));
                 }
             }
         });
@@ -125,8 +125,8 @@ describe("Matrix implementation", () => {
                 [0, 0, 0, 1]
             ];
             for (let i = 0; i < answer1.length; i++){
-                for(let j = 0; j < answer1[0].length; j++){
-                  expect(answer1[i][j]).toBe(translateMatrix.matrixArray[i][j]);
+                for (let j = 0; j < answer1[0].length; j++){
+                    expect(answer1[i][j]).toBe(translateMatrix.matrixArray[i][j]);
                 }
             }
 
@@ -138,8 +138,8 @@ describe("Matrix implementation", () => {
                 [0, 0, 0, 1]
             ];
             for (let i = 0; i < answer2.length; i++){
-                for(let j = 0; j < answer2[0].length; j++){
-                  expect(answer2[i][j]).toBe(translateMatrix.matrixArray[i][j]);
+                for (let j = 0; j < answer2[0].length; j++){
+                    expect(answer2[i][j]).toBe(translateMatrix.matrixArray[i][j]);
                 }
             }
 
@@ -151,8 +151,8 @@ describe("Matrix implementation", () => {
                 [0, 0, 0, 1]
             ];
             for (let i = 0; i < answer3.length; i++){
-                for(let j = 0; j < answer3[0].length; j++){
-                  expect(parseFloat(answer3[i][j]).toFixed(3)).toBe(parseFloat(translateMatrix.matrixArray[i][j]).toFixed(3));
+                for (let j = 0; j < answer3[0].length; j++){
+                    expect(parseFloat(answer3[i][j]).toFixed(3)).toBe(parseFloat(translateMatrix.matrixArray[i][j]).toFixed(3));
                 }
             }
         });
@@ -166,8 +166,8 @@ describe("Matrix implementation", () => {
             ];
             let product = matrix.multiply(m1);
             for (let i = 0; i < answer.length; i++){
-                for(let j = 0; j < answer[0].length; j++){
-                  expect(answer[i][j]).toBe(product[i][j]);
+                for (let j = 0; j < answer[0].length; j++){
+                    expect(answer[i][j]).toBe(product[i][j]);
                 }
             }
 
@@ -179,8 +179,8 @@ describe("Matrix implementation", () => {
             ];
             let product2 = m1.multiply(m2);
             for (let i = 0; i < answer2.length; i++){
-                for(let j = 0; j < answer2[0].length; j++){
-                  expect(answer2[i][j]).toBe(product2[i][j]);
+                for (let j = 0; j < answer2[0].length; j++){
+                    expect(answer2[i][j]).toBe(product2[i][j]);
                 }
             }
         });
@@ -194,8 +194,8 @@ describe("Matrix implementation", () => {
             ];
             let product = m1.multiply(m3);
             for (let i = 0; i < answer.length; i++){
-                for(let j = 0; j < answer[0].length; j++){
-                  expect(answer[i][j]).toBe(product[i][j]);
+                for (let j = 0; j < answer[0].length; j++){
+                    expect(answer[i][j]).toBe(product[i][j]);
                 }
             }
         });
