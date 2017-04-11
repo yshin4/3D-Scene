@@ -13,7 +13,7 @@ module.exports = function (config) {
       "Mesh.js",
       "MeshLibrary.js",
       "Objecto.js",
-      "test/object-test.js"
+      "test/object-test.js",
       "test/mesh-test.js"
     ],
 
