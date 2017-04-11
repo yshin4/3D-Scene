@@ -35,13 +35,14 @@
             this.mode = f ? this.gl.TRIANGLES : this.gl.LINES;
             let shape = this.shape;
             this.vertices = f ? shape.toRawTriangleArray(shape) : shape.toRawLineArray(shape);
-            this.matrx;
+            this.matrix;
             this.child = [];
         }
 
         transformVertices(matrix){
             let Matrix = window.Matrix;
             let vertexArray = this.shape.vertices;
+            let newMatrix;
             for (let i = 0; i < this.shape.vertices.length; i++){
                 let v = vertexArray[i];
                 let vertexMatrix = new Matrix([
@@ -56,7 +57,7 @@
                 v[2] = newMatrix[2][0];
             }
             this.vertices = this.fill ? this.shape.toRawTriangleArray(this.shape) : this.shape.toRawLineArray(this.shape);
-
+            if(this.shapeName === "cube")console.log(this.vertices);
             for (let c of this.child){
                 let childMatrix = new Matrix(c.matrix.multiply(matrix));
                 c.transformVertices(childMatrix);
