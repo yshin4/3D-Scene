@@ -175,11 +175,7 @@
 
                 gl.uniformMatrix4fv(modelViewMatrix, gl.FALSE, new Float32Array(object.axis ?
                     this.getRotationMatrix(currentRotation, object.axis.x, object.axis.y, object.axis.z) :
-                [1, 0, 0, 0, // N.B. In a full-fledged matrix library, the identity
-                    0, 1, 0, 0, //      matrix should be available as a function.
-                    0, 0, 1, 0,
-                    0, 0, 0, 1]
-                ));
+                    new window.Matrix().getRawArray()));
 
                 // Set the varying vertex coordinates.
                 gl.bindBuffer(gl.ARRAY_BUFFER, object.buffer);
@@ -202,9 +198,9 @@
             };
 
             gl.uniformMatrix4fv(perspectiveMatrix, gl.FALSE, new Float32Array(this.getPerspectiveMatrix(
-                180,
+                Math.PI/2,
                 this.canvas.width / this.canvas.height,
-                10,
+                -10,
                 -100
             )));
 

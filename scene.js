@@ -8,13 +8,13 @@
     let cube = new Objecto("cube", "red", false);
 
     let pyramidMatrix2 = new Matrix();
-    pyramidMatrix2.translate(-0.4, 0.4, 0);
+    pyramidMatrix2.translate(-0.4, 0.4, 9);
     pyramidMatrix2.scale(0.5, 0.5, 0.5);
     pyramidMatrix2.rotate(290, 1, 0, 0);
     pyramid2.transformVertices(pyramidMatrix2);
 
     let pyramidMatrix3 = new Matrix();
-    pyramidMatrix3.translate(-0.4, 0.4, 0);
+    pyramidMatrix3.translate(-0.4, 0.4, -30);
     pyramidMatrix3.scale(0.5, 0.5, 0.5);
     pyramidMatrix3.rotate(290, 1, 0, 0);
     pyramid3.transformVertices(pyramidMatrix3);

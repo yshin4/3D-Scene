@@ -7,9 +7,8 @@ module.exports = function (config) {
     ],
 
     files: [
-      "*.js",
-      "test/**/*.js",
-      "test/**/*.html"
+      "Matrix.js",
+      "test/matrix-test.js"
     ],
 
     preprocessors: {
