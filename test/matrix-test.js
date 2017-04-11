@@ -105,12 +105,12 @@ describe("Matrix implementation", () => {
             let answer = [
                 [0.933, 0.067, -0.354, 0],
                 [0.067, 0.933, 0.354, 0],
-                [0.354, -0.354, 0.866],
+                [0.354, -0.354, 0.866, 0],
                 [0, 0, 0, 1]
             ];
             for (let i = 0; i < answer.length; i++){
                 for(let j = 0; j < answer[0].length; j++){
-                  expect(answer[i][j]).toBe(parseFloat(rotateMatrix.matrixArray[i][j]).toFixed(3));
+                  expect(parseFloat(answer[i][j]).toFixed(3)).toBe(parseFloat(rotateMatrix.matrixArray[i][j]).toFixed(3));
                 }
             }
         });
@@ -145,14 +145,14 @@ describe("Matrix implementation", () => {
 
             translateMatrix.rotate(30, 1, 1, 0);
             let answer3 = [
-                [0.466, 0.033, -0.176, 0.3],
-                [0.02, 0.279, 0.106, 1.2],
+                [0.467, 0.033, -0.177, 0.3],
+                [0.02, 0.280, 0.106, 1.2],
                 [0.424, -0.424, 1.039, -0.1],
                 [0, 0, 0, 1]
             ];
             for (let i = 0; i < answer3.length; i++){
                 for(let j = 0; j < answer3[0].length; j++){
-                  expect(answer3[i][j]).toBe(translateMatrix.matrixArray[i][j]);
+                  expect(parseFloat(answer3[i][j]).toFixed(3)).toBe(parseFloat(translateMatrix.matrixArray[i][j]).toFixed(3));
                 }
             }
         });
@@ -177,7 +177,7 @@ describe("Matrix implementation", () => {
                 [58, 95, 71, 92],
                 [90, 107, 81, 142]
             ];
-            let product2 = m2.multiply(m3);
+            let product2 = m1.multiply(m2);
             for (let i = 0; i < answer2.length; i++){
                 for(let j = 0; j < answer2[0].length; j++){
                   expect(answer2[i][j]).toBe(product2[i][j]);
