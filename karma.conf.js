@@ -14,7 +14,8 @@ module.exports = function (config) {
       "MeshLibrary.js",
       "Objecto.js",
       "test/object-test.js",
-      "test/mesh-test.js"
+      "test/mesh-test.js",
+      "test/meshLibrary-test.js"
     ],
 
     preprocessors: {

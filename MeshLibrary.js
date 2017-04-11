@@ -296,6 +296,7 @@
         pyramid,
         sphere,
         cube,
-        icosahedron
+        icosahedron,
+        getMiddlePoint
     };
 })();
