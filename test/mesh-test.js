@@ -2,39 +2,8 @@ describe("Mesh implementation", () => {
     let Mesh = window.Mesh;
     let Mesh = new Mesh();
 
-    let ma1 = [
-        [5, 2, 6, 1],
-        [0, 6, 2, 0],
-        [3, 8, 1, 4],
-        [1, 8, 5, 6]
-    ];
-
-    let ma2 = [
-        [7, 5, 8, 0],
-        [1, 8, 2, 6],
-        [9, 4, 3, 8],
-        [5, 3, 7, 9]
-    ];
-
-    let ma3 = [
-        [7],
-        [5],
-        [8],
-        [0]
-    ];
-
-    let m1 = new Matrix(ma1);
-    let m2 = new Matrix(ma2);
-    let m3 = new Matrix(ma3);
-
     describe("initialization", () => {
-        it("should initialize with identity matrix", () => {
-          let identityMatrix = new Matrix([
-            [ 1, 0, 0, 0 ],
-            [ 0, 1, 0, 0 ],
-            [ 0, 0, 1, 0 ],
-            [ 0, 0, 0, 1 ]
-          ]);
+        it("should initialize Mesh with vertices and indices", () => {
 
           for (let i = 0; i < matrix.length; i++){
               for(let j = 0; j < matrix[0].length; j++){

@@ -9,9 +9,11 @@ module.exports = function (config) {
     files: [
       "Matrix.js",
       "test/matrix-test.js",
-      // "Objecto.js",
-      // "test/object-test.js",
-      "Mesh.js"
+      "glsl-utilities.js",
+      "Mesh.js",
+      "MeshLibrary.js",
+      "Objecto.js",
+      "test/object-test.js"
       "test/mesh-test.js"
     ],
 
