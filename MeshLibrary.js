@@ -111,7 +111,6 @@
         ];
 
         indices = roundSphere(vertices, indices, roundness);
-
         return new Mesh(vertices, indices);
     };
 

@@ -83,8 +83,20 @@
             ];
         }
 
+        getPerspectiveMatrix(fieldofviewInRadians, aspect, near, far){
+            let f = Math.tan(Math.PI * 0.5 - 0.5 * fieldofviewInRadians);
+            let rangeInv = 1.0 / (near - far);
+
+            return [
+                f / aspect, 0, 0, 0,
+                0, f, 0, 0,
+                0, 0, (near + far) * rangeInv, -1,
+                0, 0, near * far * rangeInv * 2, 0
+            ];
+        }
+
         setup(objectArray) {
-            let GLSLUtilities = GLSLUtilities.window();
+            let GLSLUtilities = window.GLSLUtilities;
             let $ = window.$;
             let gl = GLSLUtilities.getGL(this.canvas);
             if (!gl) {
@@ -127,14 +139,14 @@
                 (shader) => {
                     abort = true;
                     alert("Shader problem: " + gl.getShaderInfoLog(shader));
-                },
+                }
 
                 // Another simplistic error check: we don't even access the faulty
                 // shader program.
-                (shaderProgram) => {
-                    abort = true;
-                    alert("Could not link shaders...sorry.");
-                }
+                // (shaderProgram) => {
+                //     abort = true;
+                //     alert("Could not link shaders...sorry.");
+                // }
             );
 
             // If the abort variable is true here, we can't continue.
@@ -154,6 +166,7 @@
             let rotationMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
             let modelViewMatrix = gl.getUniformLocation(shaderProgram, "modelViewMatrix");
             let projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
+            let perspectiveMatrix = gl.getUniformLocation(shaderProgram, "perspectiveMatrix");
 
             let drawObject = (object) => {
                 // Set the varying colors.
@@ -187,6 +200,13 @@
                 // All done.
                 gl.flush();
             };
+
+            gl.uniformMatrix4fv(perspectiveMatrix, gl.FALSE, new Float32Array(this.getPerspectiveMatrix(
+                180,
+                this.canvas.width / this.canvas.height,
+                10,
+                -100
+            )));
 
             gl.uniformMatrix4fv(projectionMatrix, gl.FALSE, new Float32Array(this.getOrthoMatrix(
                 -2 * (this.canvas.width / this.canvas.height),

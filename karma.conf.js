@@ -2,15 +2,18 @@
 module.exports = function (config) {
   config.set({
     frameworks: [
-      "jasmine"
+      "jasmine",
+      "fixture"
     ],
 
     files: [
       "*.js",
-      "test/**/*.js"
+      "test/**/*.js",
+      "test/**/*.html"
     ],
 
     preprocessors: {
+      "test//**/*.html": ["html2js"],
       "*.js": ["coverage"]
     },
 

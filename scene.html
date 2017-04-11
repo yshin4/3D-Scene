@@ -21,6 +21,7 @@
     <script src="glsl-utilities.js"></script>
 
     <!-- Shapes is a library that generates "canned" shapes. -->
+    <script src="Mesh.js"></script>
     <script src="MeshLibrary.js"></script>
     <script src="DrawShape.js"></script>
 
@@ -45,7 +46,7 @@
       uniform mat4 rotationMatrix;
       uniform mat4 projectionMatrix;
       uniform mat4 modelViewMatrix;
-
+      uniform mat4 perspectiveMatrix;
 
       void main(void) {
           //gl_Position = rotationMatrix * vec4(vertexPosition, 1.0);
@@ -70,7 +71,6 @@
       }
     </script>
     <script src="Matrix.js"></script>
-    <script src="Mesh.js"></script>
     <script src="scene.js"></script>
   </body>
 </html>

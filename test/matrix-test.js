@@ -1,5 +1,5 @@
 describe("Matrix implementation", () => {
-    let Matrix = Matrix;
+    let Matrix = window.Matrix;
     let matrix = new Matrix();
 
     let ma1 = [

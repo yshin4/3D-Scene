@@ -17,14 +17,17 @@
             };
 
             let getColor = {
-                red: { r: 1.0, g: 0.0, b: 0.0 },
+                red: { r: 10.0, g: 0.0, b: 0.0 },
                 blue: { r: 0.0, g: 0.0, b: 1.0 },
                 green: { r: 0.0, g: 1.0, b: 0.0 },
-                yellow: { r: 1.0, g: 1.0, b: 0.3 },
-                cyan: { r: 0.0, g: 0.7, b: 0.8 },
+                yellow: { r: 3.0, g: 3.0, b: 0.3 },
+                cyan: { r: 0.0, g: 1.7, b: 1.8 },
                 purple: { r: 0.7, g: 0.0, b: 0.7 },
                 black: { r: 1.0, g: 1.0, b: 1.0 },
-                grey: { r: 0.8, g: 0.9, b: 0.9 }
+                grey: { r: 0.8, g: 0.9, b: 0.9 },
+                lightPink: { r: 10.0, g: 1.41, b: 1.7},
+                pink: { r: 13.0, g: 1, b: 1.7},
+                hotPink: { r: 10.0, g: 0.5, b: 0.7}
             };
             this.fill = f;
             this.shape = getShape[s] || new window.Mesh(s.vertices, s.indices);
