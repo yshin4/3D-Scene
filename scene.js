@@ -10,19 +10,19 @@
     let pyramidMatrix2 = new Matrix();
     pyramidMatrix2.translate(-0.4, 0.4, 9);
     pyramidMatrix2.scale(0.5, 0.5, 0.5);
-    pyramidMatrix2.rotate(290, 1, 0, 0);
+    pyramidMatrix2.rotate(0, 0, 0, 0);
     pyramid2.transformVertices(pyramidMatrix2);
 
     let pyramidMatrix3 = new Matrix();
     pyramidMatrix3.translate(-0.4, 0.4, -30);
     pyramidMatrix3.scale(0.5, 0.5, 0.5);
-    pyramidMatrix3.rotate(290, 1, 0, 0);
+    pyramidMatrix3.rotate(0, 0, 0, 0);
     pyramid3.transformVertices(pyramidMatrix3);
 
     let pyramidMatrix = new Matrix();
     pyramidMatrix.translate(0, 0, 0);
     pyramidMatrix.scale(1, 1, 1);
-    pyramidMatrix.rotate(0, 0, 0, 0);
+    pyramidMatrix.rotate(0, 1, 0, 0);
     pyramid.matrix = pyramidMatrix;
     pyramid.transformVertices(pyramidMatrix);
 
@@ -55,7 +55,7 @@
     let leftFootMatrix = new Matrix();
     leftFootMatrix.translate(0.4, 0.8, -0.1);
     leftFootMatrix.scale(0.4, 0.13, 0.0);
-    leftFootMatrix.rotate(0, 0, 0, 0);
+    leftFootMatrix.rotate(70, 0, 1, 0);
     leftFoot.matrix = leftFootMatrix;
     leftFoot.transformVertices(leftFootMatrix);
 
@@ -73,10 +73,10 @@
     objectArray.push(pyramid2);
     objectArray.push(pyramid3);
 
-    objectArray.push(body);
-    objectArray.push(leftArm);
-    objectArray.push(leftArmStroke);
-    objectArray.push(leftFoot);
+    // objectArray.push(body);
+    // objectArray.push(leftArm);
+    // objectArray.push(leftArmStroke);
+    // objectArray.push(leftFoot);
     let drawShape = new window.DrawShape();
     drawShape.setup(objectArray);
 

@@ -83,18 +83,33 @@
             ];
         }
 
-        getPerspectiveMatrix(fieldofviewInRadians, aspect, near, far){
-            let f = Math.tan(Math.PI * 0.5 - 0.5 * fieldofviewInRadians);
-            let rangeInv = 1.0 / (near - far);
+        getPerspectiveMatrix(left, right, bottom, top, zNear, zFar){
+            let width = right - left;
+            let height = top - bottom;
+            let depth = zFar - zNear;
 
             return [
-                f / aspect, 0, 0, 0,
-                0, f, 0, 0,
-                0, 0, (near + far) * rangeInv, -1,
-                0, 0, near * far * rangeInv * 2, 0
+                (2 * zNear) / width,
+                0,
+                0,
+                0,
+
+                0,
+                (2 * zNear) / height,
+                0,
+                0,
+
+                (right + left) / width,
+                (top + bottom) / height,
+                -(zFar + zNear)/ depth,
+                -1,
+
+                0,
+                0,
+                (-2 * zNear * zFar) / depth,
+                0
             ];
         }
-
         setup(objectArray) {
             let GLSLUtilities = window.GLSLUtilities;
             let $ = window.$;
@@ -198,10 +213,12 @@
             };
 
             gl.uniformMatrix4fv(perspectiveMatrix, gl.FALSE, new Float32Array(this.getPerspectiveMatrix(
-                Math.PI/2,
-                this.canvas.width / this.canvas.height,
+                -2 * (this.canvas.width / this.canvas.height),
+                2 * (this.canvas.width / this.canvas.height),
+                -2,
+                2,
                 -10,
-                -100
+                10
             )));
 
             gl.uniformMatrix4fv(projectionMatrix, gl.FALSE, new Float32Array(this.getOrthoMatrix(

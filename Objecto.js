@@ -57,7 +57,6 @@
                 v[2] = newMatrix[2][0];
             }
             this.vertices = this.fill ? this.shape.toRawTriangleArray(this.shape) : this.shape.toRawLineArray(this.shape);
-            if(this.shapeName === "cube")console.log(this.vertices);
             for (let c of this.child){
                 let childMatrix = new Matrix(c.matrix.multiply(matrix));
                 c.transformVertices(childMatrix);
