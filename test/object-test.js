@@ -3,14 +3,14 @@ describe("Object implementation", () => {
 
     describe("creation and data access", () => {
         it("should create a Object with given properties", () => {
-            let sphere = new Object("sphere", "red", true, 3);
+            let sphere = new Objecto("sphere", "red", true, 3);
             expect(sphere.refine).toBe(3);
             expect(sphere.fill).toBe(true);
             expect(sphere.shape).toBe(MeshLibrary.sphere(3));
             expect(sphere.color).toBe({ r: 10.0, g: 0.0, b: 0.0 });
             expect(sphere.vertices).toBe(sphere.shape.toRawTriangleArray(sphere.shape));
 
-            let icosahedron = new Object("icosahedron", "orange", false);
+            let icosahedron = new Objecto("icosahedron", "orange", false);
             expect(icosahedron.refine).toBe(1);
             expect(icosahedron.fill).toBe(false);
             expect(icosahedron.shape).toBe(MeshLibrary.icosahedron);
@@ -19,7 +19,7 @@ describe("Object implementation", () => {
         });
 
         it("should have matrix", () => {
-            let cube = new Object("cube", "green", false);
+            let cube = new Objecto("cube", "green", false);
             let cubeMatrix = new Matrix();
             cubeMatrix.translate(1, 0.1, 0);
             cubeMatrix.scale(0.5, 0.5, 0.5);
