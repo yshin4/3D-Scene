@@ -5,7 +5,7 @@
 
     let leftArm = new Objecto("sphere", "lightPink", true, 3);
     let leftArmMatrix = new Matrix();
-    leftArmMatrix.translate(-0.1, 1.2, 0.1);
+    leftArmMatrix.translate(-0.05, 1.2, 0.1);
     leftArmMatrix.scale(0.2, 0.16, 0.1);
     leftArmMatrix.rotate(0, 0, 0, 0);
     leftArm.matrix = leftArmMatrix;
@@ -13,15 +13,15 @@
 
     let leftArmStroke = new Objecto("sphere", "pink", false, 3);
     let leftArmStrokeMatrix = new Matrix();
-    leftArmStrokeMatrix.translate(-0.1, 1.2, 0.1);
-    leftArmStrokeMatrix.scale(0.2, 0.16, 0);
+    leftArmStrokeMatrix.translate(-0.05, 1.2, 0.1);
+    leftArmStrokeMatrix.scale(0.2, 0.16, 0.0);
     leftArmStrokeMatrix.rotate(0, 0, 0, 0);
     leftArmStroke.matrix = leftArmStrokeMatrix;
     leftArmStroke.transformVertices(leftArmStrokeMatrix);
 
     let rightArm = new Objecto("sphere", "lightPink", true, 3);
     let rightArmMatrix = new Matrix();
-    rightArmMatrix.translate(0.75, 1.4, -0.1);
+    rightArmMatrix.translate(-0.05, 1.2, -0.1);
     rightArmMatrix.scale(0.2, 0.16, 0.1);
     rightArmMatrix.rotate(0, 0, 0, 0);
     rightArm.matrix = rightArmMatrix;
@@ -29,7 +29,7 @@
 
     let rightArmStroke = new Objecto("sphere", "pink", false, 3);
     let rightArmStrokeMatrix = new Matrix();
-    rightArmStrokeMatrix.translate(0.75, 1.4, -0.1);
+    rightArmStrokeMatrix.translate(-0.05, 1.2, -0.1);
     rightArmStrokeMatrix.scale(0.2, 0.16, 0.0);
     rightArmStrokeMatrix.rotate(0, 0, 0, 0);
     rightArmStroke.matrix = rightArmStrokeMatrix;
@@ -37,8 +37,8 @@
 
     let leftFoot = new Objecto("sphere", "hotPink", true, 3);
     let leftFootMatrix = new Matrix();
-    leftFootMatrix.translate(0.2, 0.8, 0.1);
-    leftFootMatrix.scale(0.13, 0.2, 0.0);
+    leftFootMatrix.translate(0.4, 0.8, 0);
+    leftFootMatrix.scale(0.4, 0.13, 0.0);
     leftFootMatrix.rotate(0, 0, 0, 0);
     leftFoot.matrix = leftFootMatrix;
     leftFoot.transformVertices(leftFootMatrix);
@@ -53,7 +53,7 @@
 
     let leftEye = new Objecto("sphere", "blue", true, 3);
     let leftEyeMatrix = new Matrix();
-    leftEyeMatrix.translate(0.35, 1.3, 0.1);
+    leftEyeMatrix.translate(0.55, 1.3, 0.1);
     leftEyeMatrix.scale(0.05, 0.1, 0.1);
     leftEyeMatrix.rotate(0, 0, 0, 0);
     leftEye.matrix = leftEyeMatrix;
@@ -61,7 +61,7 @@
 
     let leftEyeball = new Objecto("sphere", "white", true, 3);
     let leftEyeballMatrix = new Matrix();
-    leftEyeballMatrix.translate(0.355, 1.349, 0.2);
+    leftEyeballMatrix.translate(0.555, 1.349, 0.2);
     leftEyeballMatrix.scale(0.025, 0.05, 0.1);
     leftEyeballMatrix.rotate(0, 0, 0, 0);
     leftEyeball.matrix = leftEyeballMatrix;
@@ -69,7 +69,7 @@
 
     let rightEye = new Objecto("sphere", "blue", true, 3);
     let rightEyeMatrix = new Matrix();
-    rightEyeMatrix.translate(0.6, 1.3, 0.1);
+    rightEyeMatrix.translate(0.55, 1.3, -0.1);
     rightEyeMatrix.scale(0.05, 0.1, 0.1);
     rightEyeMatrix.rotate(0, 0, 0, 0);
     rightEye.matrix = rightEyeMatrix;
@@ -77,7 +77,7 @@
 
     let rightEyeball = new Objecto("sphere", "white", true, 3);
     let rightEyeballMatrix = new Matrix();
-    rightEyeballMatrix.translate(0.605, 1.349, 0.2);
+    rightEyeballMatrix.translate(0.555, 1.349, -0.2);
     rightEyeballMatrix.scale(0.025, 0.05, 0.1);
     rightEyeballMatrix.rotate(0, 0, 0, 0);
     rightEyeball.matrix = rightEyeballMatrix;
@@ -85,8 +85,8 @@
 
     let mouth = new Objecto("pyramid", "hotPink", true);
     let mouthMatrix = new Matrix();
-    mouthMatrix.translate(0.5, 1.12, 0);
-    mouthMatrix.scale(0.15, 0.1, 1);
+    mouthMatrix.translate(0.62, 1.1, 0);
+    mouthMatrix.scale(0.1, 0.1, 1);
     mouthMatrix.rotate(180, 1, 0, 0);
     mouth.matrix = mouthMatrix;
     mouth.transformVertices(mouthMatrix);
@@ -100,7 +100,6 @@
     body.transformVertices(bodyMatrix);
 
     leftEye.child.push(leftEyeball);
-    rightEye.child.push(rightEyeball);
     leftArm.child.push(leftArmStroke);
     rightArm.child.push(rightArmStroke);
     body.child.push(leftArm);

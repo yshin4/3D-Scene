@@ -1,4 +1,4 @@
-describe("MeshLibrary implementation", () => {
+describe("MeshLibrary and Mesh implementation", () => {
     let MeshLibrary = window.MeshLibrary;
 
     describe("shape making function", () => {
