@@ -53,7 +53,7 @@
             [ 1, 5, 6 ],
             [ 6, 2, 1 ]
         ];
-
+        
         return new Mesh(vertices, indices);
     };
 

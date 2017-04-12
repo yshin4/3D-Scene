@@ -23,7 +23,8 @@
                 yellow: { r: 3.0, g: 3.0, b: 0.3 },
                 cyan: { r: 0.0, g: 1.7, b: 1.8 },
                 purple: { r: 0.7, g: 0.0, b: 0.7 },
-                black: { r: 1.0, g: 1.0, b: 1.0 },
+                white: { r: 10, g: 10, b: 10 },
+                black: { r: 0, g: 0, b: 0 },
                 grey: { r: 0.8, g: 0.9, b: 0.9 },
                 lightPink: { r: 10.0, g: 1.41, b: 1.7},
                 pink: { r: 13.0, g: 1, b: 1.7},
@@ -57,7 +58,8 @@
             }
             this.vertices = this.fill ? this.shape.toRawTriangleArray(this.shape) : this.shape.toRawLineArray(this.shape);
             for (let c of this.child){
-                let childMatrix = new Matrix(c.matrix.multiply(matrix));
+                let identityMatrix = new Matrix();
+                let childMatrix = new Matrix(identityMatrix.multiply(matrix));
                 c.transformVertices(childMatrix);
             }
         }
