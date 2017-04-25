@@ -3,15 +3,17 @@
     let Matrix = window.Matrix;
     let Objecto = window.Objecto;
 
-    let leftArm = new Objecto("sphere", "lightPink", true, 3);
+    let roundness = 1;
+
+    let leftArm = new Objecto("sphere", "lightPink", true, roundness);
     let leftArmMatrix = new Matrix();
     leftArmMatrix.translate(-0.1, 1.2, 0.1);
     leftArmMatrix.scale(0.2, 0.16, 0.1);
-    leftArmMatrix.rotate(0, 0, 0, 0);
+    leftArmMatrix.rotate(70, 1, 0, 0);
     leftArm.matrix = leftArmMatrix;
     leftArm.transformVertices(leftArmMatrix);
 
-    let leftArmStroke = new Objecto("sphere", "pink", false, 3);
+    let leftArmStroke = new Objecto("sphere", "pink", false, roundness);
     let leftArmStrokeMatrix = new Matrix();
     leftArmStrokeMatrix.translate(-0.1, 1.2, 0.1);
     leftArmStrokeMatrix.scale(0.2, 0.16, 0);
@@ -19,7 +21,7 @@
     leftArmStroke.matrix = leftArmStrokeMatrix;
     leftArmStroke.transformVertices(leftArmStrokeMatrix);
 
-    let rightArm = new Objecto("sphere", "lightPink", true, 3);
+    let rightArm = new Objecto("sphere", "lightPink", true, roundness);
     let rightArmMatrix = new Matrix();
     rightArmMatrix.translate(0.75, 1.4, -0.1);
     rightArmMatrix.scale(0.2, 0.16, 0.1);
@@ -27,7 +29,7 @@
     rightArm.matrix = rightArmMatrix;
     rightArm.transformVertices(rightArmMatrix);
 
-    let rightArmStroke = new Objecto("sphere", "pink", false, 3);
+    let rightArmStroke = new Objecto("sphere", "pink", false, roundness);
     let rightArmStrokeMatrix = new Matrix();
     rightArmStrokeMatrix.translate(0.75, 1.4, -0.1);
     rightArmStrokeMatrix.scale(0.2, 0.16, 0.0);
@@ -35,7 +37,7 @@
     rightArmStroke.matrix = rightArmStrokeMatrix;
     rightArmStroke.transformVertices(rightArmStrokeMatrix);
 
-    let leftFoot = new Objecto("sphere", "hotPink", true, 3);
+    let leftFoot = new Objecto("sphere", "hotPink", true, roundness);
     let leftFootMatrix = new Matrix();
     leftFootMatrix.translate(0.2, 0.8, 0.1);
     leftFootMatrix.scale(0.13, 0.2, 0.0);
@@ -43,7 +45,7 @@
     leftFoot.matrix = leftFootMatrix;
     leftFoot.transformVertices(leftFootMatrix);
 
-    let rightFoot = new Objecto("sphere", "hotPink", true, 3);
+    let rightFoot = new Objecto("sphere", "hotPink", true, roundness);
     let rightFootMatrix = new Matrix();
     rightFootMatrix.translate(0.4, 0.8, 0);
     rightFootMatrix.scale(0.4, 0.13, 0.0);
@@ -51,7 +53,7 @@
     rightFoot.matrix = rightFootMatrix;
     rightFoot.transformVertices(rightFootMatrix);
 
-    let leftEye = new Objecto("sphere", "blue", true, 3);
+    let leftEye = new Objecto("sphere", "blue", true, roundness);
     let leftEyeMatrix = new Matrix();
     leftEyeMatrix.translate(0.35, 1.3, 0.1);
     leftEyeMatrix.scale(0.05, 0.1, 0.1);
@@ -59,7 +61,7 @@
     leftEye.matrix = leftEyeMatrix;
     leftEye.transformVertices(leftEyeMatrix);
 
-    let leftEyeball = new Objecto("sphere", "white", true, 3);
+    let leftEyeball = new Objecto("sphere", "white", true, roundness);
     let leftEyeballMatrix = new Matrix();
     leftEyeballMatrix.translate(0.355, 1.349, 0.2);
     leftEyeballMatrix.scale(0.025, 0.05, 0.1);
@@ -67,7 +69,7 @@
     leftEyeball.matrix = leftEyeballMatrix;
     leftEyeball.transformVertices(leftEyeballMatrix);
 
-    let rightEye = new Objecto("sphere", "blue", true, 3);
+    let rightEye = new Objecto("sphere", "blue", true, roundness);
     let rightEyeMatrix = new Matrix();
     rightEyeMatrix.translate(0.6, 1.3, 0.1);
     rightEyeMatrix.scale(0.05, 0.1, 0.1);
@@ -75,7 +77,7 @@
     rightEye.matrix = rightEyeMatrix;
     rightEye.transformVertices(rightEyeMatrix);
 
-    let rightEyeball = new Objecto("sphere", "white", true, 3);
+    let rightEyeball = new Objecto("sphere", "white", true, roundness);
     let rightEyeballMatrix = new Matrix();
     rightEyeballMatrix.translate(0.605, 1.349, 0.2);
     rightEyeballMatrix.scale(0.025, 0.05, 0.1);
@@ -91,7 +93,7 @@
     mouth.matrix = mouthMatrix;
     mouth.transformVertices(mouthMatrix);
 
-    let body = new Objecto("sphere", "lightPink", true, 3);
+    let body = new Objecto("sphere", "lightPink", true, roundness);
     let bodyMatrix = new Matrix();
     bodyMatrix.translate(0.3, 1.2, 0);
     bodyMatrix.scale(0.5, 0.5, 0);
@@ -130,7 +132,27 @@
     objectArray.push(rightEye);
     objectArray.push(rightEyeball);
     objectArray.push(mouth);
+
     let drawShape = new window.DrawShape();
     drawShape.setup(objectArray);
+
+    let gravity = 0.5;
+    let ground = 0;
+    while(gravity < 0){
+        for(let i = 0; i < objectArray.length; i++){
+            let shape = objectArray[i];
+            let shapeY = shape.matrix.matrixArray[1][3];
+            if( shapeY > ground ){
+                let gravityMatrix = new Matrix();
+                gravityMatrix.translate(0, -1 * gravity, 0);
+                gravityMatrix.scale(1, 1, 1);
+                gravityMatrix.rotate(0, 0, 0, 0);
+                shape.matrix = gravityMatrix;
+                shape.transformVertices(gravityMatrix);
+            }
+        }
+        drawShape.setup(objectArray);
+        gravity = gravity * 2;
+    }
 
 })();
