@@ -136,21 +136,25 @@
     let drawShape = new window.DrawShape();
     drawShape.setup(objectArray);
 
-    let gravity = 0.5;
-    let ground = 0;
-    while(gravity < 0){
-        for(let i = 0; i < objectArray.length; i++){
-            let shape = objectArray[i];
+    let applyGravity = [];
+    applyGravity.push(body);
+
+    let gravity = 0.005;
+    let ground = 1;
+    while(gravity < 100){
+        for(let i = 0; i < applyGravity.length; i++){
+            let shape = applyGravity[i];
             let shapeY = shape.matrix.matrixArray[1][3];
             if( shapeY > ground ){
                 let gravityMatrix = new Matrix();
                 gravityMatrix.translate(0, -1 * gravity, 0);
                 gravityMatrix.scale(1, 1, 1);
                 gravityMatrix.rotate(0, 0, 0, 0);
-                shape.matrix = gravityMatrix;
+                shape.matrix.matrixArray = gravityMatrix.multiply(shape.matrix);
                 shape.transformVertices(gravityMatrix);
             }
         }
+        drawShape = new window.DrawShape();
         drawShape.setup(objectArray);
         gravity = gravity * 2;
     }

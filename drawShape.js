@@ -142,6 +142,23 @@
                 }
 
                 objectToDraw.colorBuffer = GLSLUtilities.initVertexBuffer(gl, objectToDraw.colors);
+
+                if (!objectToDraw.specularColors) {
+                    // Future refactor: helper function to convert a single value or
+                    // array into an array of copies of itself.
+                    objectToDraw.specularColors = [];
+                    for (let j = 0, maxj = objectToDraw.vertices.length / 3; j < maxj; j += 1) {
+                        objectToDraw.specularColors = objectToDraw.specularColors.concat(
+                            objectToDraw.specularColor.r,
+                            objectToDraw.specularColor.g,
+                            objectToDraw.specularColor.b
+                        );
+                    }
+                }
+                objectToDraw.specularBuffer = GLSLUtilities.initVertexBuffer(gl, objectToDraw.specularColors);
+
+                // One more buffer: normals.
+                objectToDraw.normalBuffer = GLSLUtilities.initVertexBuffer(gl, objectToDraw.normals);
             });
 
             let abort = false;
@@ -178,24 +195,45 @@
             gl.enableVertexAttribArray(vertexPosition);
             let vertexColor = gl.getAttribLocation(shaderProgram, "vertexColor");
             gl.enableVertexAttribArray(vertexColor);
+            let vertexDiffuseColor = gl.getAttribLocation(shaderProgram, "vertexDiffuseColor");
+            gl.enableVertexAttribArray(vertexDiffuseColor);
+            let vertexSpecularColor = gl.getAttribLocation(shaderProgram, "vertexSpecularColor");
+            gl.enableVertexAttribArray(vertexSpecularColor);
+            let normalVector = gl.getAttribLocation(shaderProgram, "normalVector");
+            gl.enableVertexAttribArray(normalVector);
+
             let rotationMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
             let modelViewMatrix = gl.getUniformLocation(shaderProgram, "modelViewMatrix");
             let projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
             let perspectiveMatrix = gl.getUniformLocation(shaderProgram, "perspectiveMatrix");
 
+            let lightPosition = gl.getUniformLocation(shaderProgram, "lightPosition");
+            let lightDiffuse = gl.getUniformLocation(shaderProgram, "lightDiffuse");
+            let lightSpecular = gl.getUniformLocation(shaderProgram, "lightSpecular");
+            let shininess = gl.getUniformLocation(shaderProgram, "shininess");
+
             let drawObject = (object) => {
                 // Set the varying colors.
                 gl.bindBuffer(gl.ARRAY_BUFFER, object.colorBuffer);
-                gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
+                gl.vertexAttribPointer(vertexDiffuseColor, 3, gl.FLOAT, false, 0, 0);
+
+                gl.bindBuffer(gl.ARRAY_BUFFER, object.specularBuffer);
+                gl.vertexAttribPointer(vertexSpecularColor, 3, gl.FLOAT, false, 0, 0);
+
+                // Set the shininess.
+                gl.uniform1f(shininess, object.shininess);
 
                 gl.uniformMatrix4fv(modelViewMatrix, gl.FALSE, new Float32Array(object.axis ?
                     this.getRotationMatrix(currentRotation, object.axis.x, object.axis.y, object.axis.z) :
                     new window.Matrix().getRawArray()));
 
                 // Set the varying vertex coordinates.
-                gl.bindBuffer(gl.ARRAY_BUFFER, object.buffer);
+                gl.bindBuffer(gl.ARRAY_BUFFER, object.normalBuffer);
+                gl.vertexAttribPointer(normalVector, 3, gl.FLOAT, false, 0, 0);
+                gl.bindBuffer(gl.ARRAY_BUFFER, object.vertexBuffer);
                 gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
                 gl.drawArrays(object.mode, 0, object.vertices.length / 3);
+
             };
 
             let drawScene = () => {
@@ -229,6 +267,10 @@
                 -10,
                 10
             )));
+
+            gl.uniform4fv(lightPosition, [500.0, 1000.0, 100.0, 1.0]);
+            gl.uniform3fv(lightDiffuse, [1.0, 1.0, 1.0]);
+            gl.uniform3fv(lightSpecular, [1.0, 1.0, 1.0]);
 
             let animationActive = false;
             let currentRotation = 0.0;
