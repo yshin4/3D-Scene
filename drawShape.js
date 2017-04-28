@@ -110,7 +110,7 @@
                 0
             ];
         }
-        setup(objectArray) {
+        setup(objectArray, tick) {
             let GLSLUtilities = window.GLSLUtilities;
             let $ = window.$;
             let gl = GLSLUtilities.getGL(this.canvas);
@@ -126,7 +126,7 @@
             gl.viewport(0, 0, this.canvas.width, this.canvas.height);
 
             objectArray.forEach((objectToDraw) => {
-                objectToDraw.buffer = GLSLUtilities.initVertexBuffer(gl, objectToDraw.vertices);
+                objectToDraw.vertexBuffer = GLSLUtilities.initVertexBuffer(gl, objectToDraw.vertices);
 
                 if (!objectToDraw.colors) {
                     // If we have a single color, we expand that into an array
@@ -193,8 +193,8 @@
             // Hold on to the important variables within the shaders.
             let vertexPosition = gl.getAttribLocation(shaderProgram, "vertexPosition");
             gl.enableVertexAttribArray(vertexPosition);
-            let vertexColor = gl.getAttribLocation(shaderProgram, "vertexColor");
-            gl.enableVertexAttribArray(vertexColor);
+            // let vertexColor = gl.getAttribLocation(shaderProgram, "vertexColor");
+            // gl.enableVertexAttribArray(vertexColor);
             let vertexDiffuseColor = gl.getAttribLocation(shaderProgram, "vertexDiffuseColor");
             gl.enableVertexAttribArray(vertexDiffuseColor);
             let vertexSpecularColor = gl.getAttribLocation(shaderProgram, "vertexSpecularColor");
@@ -241,7 +241,7 @@
                 gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
                 // Set up the rotation matrix.
                 gl.uniformMatrix4fv(rotationMatrix, gl.FALSE,
-                  new Float32Array(this.getRotationMatrix(currentRotation, 1, 0, 0)));
+                  new Float32Array(this.getRotationMatrix(currentRotation, 0, 1, 0)));
 
                 // Display the objects.
                 objectArray.forEach(drawObject);
@@ -305,6 +305,7 @@
 
                 // All clear.
                 currentRotation += DEGREES_PER_MILLISECOND * progress;
+                //tick();
                 drawScene();
                 if (currentRotation >= FULL_CIRCLE) {
                     currentRotation -= FULL_CIRCLE;

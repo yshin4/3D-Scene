@@ -1,7 +1,7 @@
 (() => {
     class Objecto {
 
-        constructor (s, c, f, r){
+        constructor (s, c, f, r, l, shine){
             let MeshLibrary = window.MeshLibrary;
             let GLSLUtilities = window.GLSLUtilities;
             this.shapeName = s;
@@ -36,6 +36,9 @@
             this.mode = f ? this.gl.TRIANGLES : this.gl.LINES;
             let shape = this.shape;
             this.vertices = f ? shape.toRawTriangleArray(shape) : shape.toRawLineArray(shape);
+            this.normals = shape.toNormalArray(shape);
+            this.specularColor = l || { r: 1.0, g: 1.0, b: 1.0 };
+            this.shininess = shine || 10;
             this.matrix;
             this.child = [];
         }
