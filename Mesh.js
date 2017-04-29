@@ -68,6 +68,25 @@
 
             return result;
         };
+
+        toVertexNormalArray (indexedVertices) {
+            let result = [];
+
+            // For each face...
+            for (let i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
+                // For each vertex in that face...
+                for (let j = 0, maxj = indexedVertices.indices[i].length; j < maxj; j += 1) {
+                    let p = indexedVertices.vertices[indexedVertices.indices[i][j]];
+                    let normal = new Vector(p[0], p[1], p[2]).unit;
+                    result = result.concat(
+                        [ normal.x, normal.y, normal.z ]
+                    );
+                }
+            }
+
+            return result;
+        }
+
     }
 
     window.Mesh = Mesh;

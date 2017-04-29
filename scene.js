@@ -97,7 +97,7 @@
 
     let newBodyMatrix = new Matrix();
     newBodyMatrix.scale(1, 1, 1);
-    newBodyMatrix.rotate(0, 0, 0, 0);
+    newBodyMatrix.rotate(170, 0, 1, 0);
     newBodyMatrix.translate(-1.5, -1.5, 0);
     body.transformVertices(newBodyMatrix);
 

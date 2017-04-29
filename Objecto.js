@@ -36,9 +36,9 @@
             this.mode = f ? this.gl.TRIANGLES : this.gl.LINES;
             let shape = this.shape;
             this.vertices = f ? shape.toRawTriangleArray(shape) : shape.toRawLineArray(shape);
-            this.normals = shape.toNormalArray(shape);
+            this.normals = s === "sphere" ? shape.toVertexNormalArray(shape) : shape.toNormalArray(shape);
             this.specularColor = l || { r: 1.0, g: 1.0, b: 1.0 };
-            this.shininess = shine || 10;
+            this.shininess = shine || 15;
             this.matrix;
             this.child = [];
         }

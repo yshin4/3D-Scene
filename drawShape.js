@@ -110,7 +110,39 @@
                 0
             ];
         }
-        setup(objectArray, tick) {
+
+        getCameraMatrix(px, py, pz, qx, qy, qz, ux, uy, uz){
+            let up = new Vector([0], [1], [0]);
+            let p = new Vector([px], [py], [pz]);
+            let q = new Vector([qx], [qy], [qz]);
+            let z = (p.subtract(q)).unit();
+            let y = (up.subtract(up.projection(z))).unit();
+            let x = (y.cross(z)).unit();
+
+            return [
+                x.x,
+                x.y,
+                x.z,
+                -1 * (p.dot(x)),
+
+                y.x,
+                y.y,
+                y.z,
+                -1 * (p.dot(y)),
+
+                z.x,
+                z.y,
+                z.z,
+                -1 * (p.dot(y)),
+
+                0,
+                0,
+                0,
+                1
+            ];
+        }
+
+        setup(objectArray) {
             let GLSLUtilities = window.GLSLUtilities;
             let $ = window.$;
             let gl = GLSLUtilities.getGL(this.canvas);
@@ -206,11 +238,13 @@
             let modelViewMatrix = gl.getUniformLocation(shaderProgram, "modelViewMatrix");
             let projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
             let perspectiveMatrix = gl.getUniformLocation(shaderProgram, "perspectiveMatrix");
+            let cameraMatrix = gl.getUniformLocation(shaderProgram, "cameraMatrix");
 
             let lightPosition = gl.getUniformLocation(shaderProgram, "lightPosition");
             let lightDiffuse = gl.getUniformLocation(shaderProgram, "lightDiffuse");
             let lightSpecular = gl.getUniformLocation(shaderProgram, "lightSpecular");
             let shininess = gl.getUniformLocation(shaderProgram, "shininess");
+
 
             let drawObject = (object) => {
                 // Set the varying colors.
@@ -268,8 +302,18 @@
                 10
             )));
 
-            gl.uniform4fv(lightPosition, [500.0, 1000.0, 100.0, 1.0]);
-            gl.uniform3fv(lightDiffuse, [1.0, 1.0, 1.0]);
+            gl.uniformMatrix4fv(cameraMatrix, gl.FALSE, new Float32Array(this.getOrthoMatrix(
+                -0.6 * (this.canvas.width / this.canvas.height),
+                0.6 * (this.canvas.width / this.canvas.height),
+                -1.2,
+                1.2,
+                -10,
+                10
+            )));
+
+
+            gl.uniform4fv(lightPosition, [-300.0, 1000.0, 1000.0, 10.0]);
+            gl.uniform3fv(lightDiffuse, [0.3, 1.0, 1.0]);
             gl.uniform3fv(lightSpecular, [1.0, 1.0, 1.0]);
 
             let animationActive = false;
@@ -305,7 +349,20 @@
 
                 // All clear.
                 currentRotation += DEGREES_PER_MILLISECOND * progress;
-                //tick();
+
+                // for(let i = 0; i < applyGravity.length; i++){
+                //     let shape = applyGravity[i];
+                //     let shapeY = shape.matrix.matrixArray[1][3];
+                //     if( shapeY > ground ){
+                //         let gravityMatrix = new Matrix();
+                //         gravityMatrix.translate(0, -1 * gravity, 0);
+                //         gravityMatrix.scale(1, 1, 1);
+                //         gravityMatrix.rotate(0, 0, 0, 0);
+                //         shape.matrix.matrixArray = gravityMatrix.multiply(shape.matrix);
+                //         shape.transformVertices(gravityMatrix);
+                //     }
+                // }
+
                 drawScene();
                 if (currentRotation >= FULL_CIRCLE) {
                     currentRotation -= FULL_CIRCLE;
