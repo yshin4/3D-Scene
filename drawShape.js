@@ -329,6 +329,10 @@
             const DEGREES_PER_MILLISECOND = 0.033;
             const FULL_CIRCLE = 360.0;
 
+            const ACCELERATION_COEFFICIENT = 0.05;
+            let velocity = 0;
+            let acceleration = 1;
+
             let advanceScene = (timestamp) => {
                 // Check if the user has turned things off.
                 if (!animationActive) {
@@ -365,6 +369,18 @@
                 //         shape.transformVertices(gravityMatrix);
                 //     }
                 // }
+
+                for(let i = 0; i < objectArray.length; i++){
+                    let shape = objectArray[i];
+                    let physicsMatrix = new Matrix();
+                    physicsMatrix.translate(velocity, 0, 0);
+                    physicsMatrix.scale(1, 1, 1);
+                    physicsMatrix.rotate(0, 0, 0, 0);
+                    shape.matrix.matrixArray = shape.matrix.multiply(physicsMatrix);
+                    shape.transformVertices(physicsMatrix);
+                }
+
+                velocity += acceleration * ACCELERATION_COEFFICIENT;
 
                 drawScene();
                 if (currentRotation >= FULL_CIRCLE) {

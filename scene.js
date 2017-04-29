@@ -113,11 +113,6 @@
     objectArray.push(rightEyeball);
     objectArray.push(mouth);
 
-    let v = new Vector([0],[1],[0]);
-    let w = new Vector([0],[1],[1]);
-
-    console.log( (v.subtract(w)).unit);
-
     let drawShape = new window.DrawShape();
     drawShape.setup(objectArray, () => {
       console.log("Hi Jen");
