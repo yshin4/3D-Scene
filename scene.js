@@ -97,7 +97,7 @@
 
     let newBodyMatrix = new Matrix();
     newBodyMatrix.scale(1, 1, 1);
-    newBodyMatrix.rotate(170, 0, 1, 0);
+    newBodyMatrix.rotate(0, 0, 1, 0);
     newBodyMatrix.translate(-1.5, -1.5, 0);
     body.transformVertices(newBodyMatrix);
 
@@ -112,6 +112,11 @@
     objectArray.push(rightEye);
     objectArray.push(rightEyeball);
     objectArray.push(mouth);
+
+    let v = new Vector([0],[1],[0]);
+    let w = new Vector([0],[1],[1]);
+
+    console.log( (v.subtract(w)).unit);
 
     let drawShape = new window.DrawShape();
     drawShape.setup(objectArray, () => {

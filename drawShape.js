@@ -112,12 +112,12 @@
         }
 
         getCameraMatrix(px, py, pz, qx, qy, qz, ux, uy, uz){
-            let up = new Vector([0], [1], [0]);
+            let u = new Vector([ux], [uy], [uz]);
             let p = new Vector([px], [py], [pz]);
             let q = new Vector([qx], [qy], [qz]);
-            let z = (p.subtract(q)).unit();
-            let y = (up.subtract(up.projection(z))).unit();
-            let x = (y.cross(z)).unit();
+            let z = (p.subtract(q)).unit;
+            let y = (u.subtract(u.projection(z))).unit;
+            let x = (y.cross(z)).unit;
 
             return [
                 x.x,
@@ -302,17 +302,20 @@
                 10
             )));
 
-            gl.uniformMatrix4fv(cameraMatrix, gl.FALSE, new Float32Array(this.getOrthoMatrix(
-                -0.6 * (this.canvas.width / this.canvas.height),
-                0.6 * (this.canvas.width / this.canvas.height),
-                -1.2,
-                1.2,
-                -10,
-                10
+            gl.uniformMatrix4fv(cameraMatrix, gl.FALSE, new Float32Array(this.getCameraMatrix(
+                -0 * (this.canvas.width / this.canvas.height),
+                0 * (this.canvas.width / this.canvas.height),
+                -0,
+                -0.5,
+                0.1,
+                -1,
+                0,
+                1,
+                0
             )));
 
 
-            gl.uniform4fv(lightPosition, [-300.0, 1000.0, 1000.0, 10.0]);
+            gl.uniform4fv(lightPosition, [-300.0, 1000.0, 700.0, .0]);
             gl.uniform3fv(lightDiffuse, [0.3, 1.0, 1.0]);
             gl.uniform3fv(lightSpecular, [1.0, 1.0, 1.0]);
 
