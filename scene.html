@@ -51,6 +51,7 @@
       uniform mat4 modelViewMatrix;
       uniform mat4 perspectiveMatrix;
       uniform mat4 cameraMatrix;
+      uniform mat4 transformMatrix;
 
       // We don't calculate color in the vertex shader anymore.  Instead,
       // we will pass on information that will affect the color later.
@@ -82,7 +83,7 @@
           // We now defer all color calculations to the fragment shader.
           fragmentDiffuseColor = vertexDiffuseColor;
           fragmentSpecularColor = vertexSpecularColor;
-          gl_Position = projectionMatrix * cameraMatrix * //rotationMatrix *
+          gl_Position = projectionMatrix * cameraMatrix * transformMatrix * //rotationMatrix *
                         modelViewMatrix * vec4(2.0 * vertexPosition, 1.0);
       }
     </script>

@@ -85,6 +85,7 @@
     body.matrix = bodyMatrix;
     body.transformVertices(bodyMatrix);
 
+
     leftEye.child.push(leftEyeball);
     rightEye.child.push(rightEyeball);
     body.child.push(leftArm);

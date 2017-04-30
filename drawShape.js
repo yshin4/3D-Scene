@@ -55,6 +55,14 @@
             ];
         }
 
+        getTransformMatrix (px, py, pz) {
+            let m = new Matrix();
+            m.translate(px, py, pz);
+            m.scale(1, 1, 1);
+            m.rotate(0, 0, 0, 0);
+            return m.getRawArray();
+        }
+
         getOrthoMatrix (left, right, bottom, top, zNear, zFar){
             let width = right - left;
             let height = top - bottom;
@@ -143,6 +151,7 @@
         }
 
         setup(objectArray) {
+
             let GLSLUtilities = window.GLSLUtilities;
             let $ = window.$;
             let gl = GLSLUtilities.getGL(this.canvas);
@@ -239,6 +248,7 @@
             let projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
             let perspectiveMatrix = gl.getUniformLocation(shaderProgram, "perspectiveMatrix");
             let cameraMatrix = gl.getUniformLocation(shaderProgram, "cameraMatrix");
+            let transformMatrix = gl.getUniformLocation(shaderProgram, "transformMatrix");
 
             let lightPosition = gl.getUniformLocation(shaderProgram, "lightPosition");
             let lightDiffuse = gl.getUniformLocation(shaderProgram, "lightDiffuse");
@@ -276,6 +286,9 @@
                 // Set up the rotation matrix.
                 gl.uniformMatrix4fv(rotationMatrix, gl.FALSE,
                   new Float32Array(this.getRotationMatrix(currentRotation, 0, 1, 0)));
+
+                gl.uniformMatrix4fv(transformMatrix, gl.FALSE,
+                  new Float32Array(this.getTransformMatrix(velocity, 0, 0)));
 
                 // Display the objects.
                 objectArray.forEach(drawObject);
@@ -329,7 +342,8 @@
             const DEGREES_PER_MILLISECOND = 0.033;
             const FULL_CIRCLE = 360.0;
 
-            const ACCELERATION_COEFFICIENT = 0.05;
+            const ACCELERATION_COEFFICIENT = -0.0098;
+            let position = 0;
             let velocity = 0;
             let acceleration = 1;
 
@@ -356,30 +370,7 @@
 
                 // All clear.
                 currentRotation += DEGREES_PER_MILLISECOND * progress;
-
-                // for(let i = 0; i < applyGravity.length; i++){
-                //     let shape = applyGravity[i];
-                //     let shapeY = shape.matrix.matrixArray[1][3];
-                //     if( shapeY > ground ){
-                //         let gravityMatrix = new Matrix();
-                //         gravityMatrix.translate(0, -1 * gravity, 0);
-                //         gravityMatrix.scale(1, 1, 1);
-                //         gravityMatrix.rotate(0, 0, 0, 0);
-                //         shape.matrix.matrixArray = gravityMatrix.multiply(shape.matrix);
-                //         shape.transformVertices(gravityMatrix);
-                //     }
-                // }
-
-                for(let i = 0; i < objectArray.length; i++){
-                    let shape = objectArray[i];
-                    let physicsMatrix = new Matrix();
-                    physicsMatrix.translate(velocity, 0, 0);
-                    physicsMatrix.scale(1, 1, 1);
-                    physicsMatrix.rotate(0, 0, 0, 0);
-                    shape.matrix.matrixArray = shape.matrix.multiply(physicsMatrix);
-                    shape.transformVertices(physicsMatrix);
-                }
-
+                position += velocity;
                 velocity += acceleration * ACCELERATION_COEFFICIENT;
 
                 drawScene();
