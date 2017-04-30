@@ -288,7 +288,7 @@
                   new Float32Array(this.getRotationMatrix(currentRotation, 0, 1, 0)));
 
                 gl.uniformMatrix4fv(transformMatrix, gl.FALSE,
-                  new Float32Array(this.getTransformMatrix(velocity, 0, 0)));
+                  new Float32Array(this.getTransformMatrix(position.x, position.y, position.z)));
 
                 // Display the objects.
                 objectArray.forEach(drawObject);
@@ -316,9 +316,9 @@
             )));
 
             gl.uniformMatrix4fv(cameraMatrix, gl.FALSE, new Float32Array(this.getCameraMatrix(
-                -0 * (this.canvas.width / this.canvas.height),
                 0 * (this.canvas.width / this.canvas.height),
-                -0,
+                0 * (this.canvas.width / this.canvas.height),
+                0,
                 -0.5,
                 0.1,
                 -1,
@@ -343,7 +343,7 @@
             const FULL_CIRCLE = 360.0;
 
             const ACCELERATION_COEFFICIENT = -0.0098;
-            let position = 0;
+            let position = {x: 0, y: 0, z: 0};
             let velocity = 0;
             let acceleration = 1;
 
@@ -370,8 +370,14 @@
 
                 // All clear.
                 currentRotation += DEGREES_PER_MILLISECOND * progress;
-                position += velocity;
+                position.z += velocity;
+                position.x -= velocity;
+
                 velocity += acceleration * ACCELERATION_COEFFICIENT;
+
+                if(position.y < -0.5 || position.x > 0.5){
+                    velocity *= -1;
+                }
 
                 drawScene();
                 if (currentRotation >= FULL_CIRCLE) {
