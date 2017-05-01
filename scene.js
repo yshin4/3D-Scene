@@ -85,7 +85,6 @@
     body.matrix = bodyMatrix;
     body.transformVertices(bodyMatrix);
 
-
     leftEye.child.push(leftEyeball);
     rightEye.child.push(rightEyeball);
     body.child.push(leftArm);
@@ -99,7 +98,7 @@
     let newBodyMatrix = new Matrix();
     newBodyMatrix.scale(1, 1, 1);
     newBodyMatrix.rotate(0, 0, 1, 0);
-    newBodyMatrix.translate(-1.5, -1.5, 0);
+    newBodyMatrix.translate(-1.5, -0.8, 0);
     body.transformVertices(newBodyMatrix);
 
     let objectArray = [];

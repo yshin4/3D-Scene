@@ -56,11 +56,12 @@
         }
 
         getTransformMatrix (px, py, pz) {
-            let m = new Matrix();
-            m.translate(px, py, pz);
-            m.scale(1, 1, 1);
-            m.rotate(0, 0, 0, 0);
-            return m.getRawArray();
+            return[
+                1, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1, 0,
+                px, py, pz, 1
+            ];
         }
 
         getOrthoMatrix (left, right, bottom, top, zNear, zFar){
@@ -342,7 +343,7 @@
             const DEGREES_PER_MILLISECOND = 0.033;
             const FULL_CIRCLE = 360.0;
 
-            const ACCELERATION_COEFFICIENT = -0.0098;
+            const ACCELERATION_COEFFICIENT = -0.098;
             let position = {x: 0, y: 0, z: 0};
             let velocity = 0;
             let acceleration = 1;
@@ -370,13 +371,23 @@
 
                 // All clear.
                 currentRotation += DEGREES_PER_MILLISECOND * progress;
-                position.z += velocity;
-                position.x -= velocity;
+
+                position.y += velocity;
+
+                //hits ground, velocity flips, decreases
 
                 velocity += acceleration * ACCELERATION_COEFFICIENT;
 
-                if(position.y < -0.5 || position.x > 0.5){
+                // if(position.y < -0.35){
+                //     velocity *= -1;
+                // }
+
+                if(position.y < -1.4){
                     velocity *= -1;
+                    velocity -= 0.1;
+                }
+
+                if(position.y > 1.7){
                 }
 
                 drawScene();
