@@ -328,10 +328,25 @@
                 0
             )));
 
+            let lightColor = [0.3, 1.0, 1.0];
 
             gl.uniform4fv(lightPosition, [-300.0, 1000.0, 700.0, .0]);
-            gl.uniform3fv(lightDiffuse, [0.3, 1.0, 1.0]);
+            gl.uniform3fv(lightDiffuse, lightColor);
             gl.uniform3fv(lightSpecular, [1.0, 1.0, 1.0]);
+
+            let ChangeLightColor = () => {
+                let r = document.getElementById("redValue").value
+                let g = document.getElementById("greenValue").value
+                let b = document.getElementById("blueValue").value
+                lightColor = [r, g, b];
+                gl.uniform3fv(lightDiffuse, lightColor);
+            };
+
+            $(document).ready(function() {
+                $("#ChangeColor").click(function(){
+                    ChangeLightColor();
+                });
+            });
 
             let animationActive = false;
             let currentRotation = 0.0;
@@ -347,6 +362,8 @@
             let position = {x: 0, y: 0, z: 0};
             let velocity = 0;
             let acceleration = 1;
+
+            let ground = -0.2;
 
             let advanceScene = (timestamp) => {
                 // Check if the user has turned things off.
@@ -373,24 +390,26 @@
                 currentRotation += DEGREES_PER_MILLISECOND * progress;
 
                 position.y += velocity;
-
+              
                 //hits ground, velocity flips, decreases
 
                 velocity += acceleration * ACCELERATION_COEFFICIENT;
 
-                // if(position.y < -0.35){
+                // if(position.y < -1.4){
                 //     velocity *= -1;
+                //     velocity -= 0.1;
                 // }
 
-                if(position.y < -1.4){
+                if(position.y < ground){
                     velocity *= -1;
-                    velocity -= 0.1;
                 }
 
                 if(position.y > 1.7){
+                  velocity -= 0.3 * velocity;
                 }
 
                 drawScene();
+
                 if (currentRotation >= FULL_CIRCLE) {
                     currentRotation -= FULL_CIRCLE;
                 }

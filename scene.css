@@ -4,3 +4,9 @@ canvas {
     margin-left: auto;
     margin-right: auto;
 }
+
+#ChangeColor {
+    margin-top: 10px;
+    margin-left: 11px;
+    padding: 10px;
+}

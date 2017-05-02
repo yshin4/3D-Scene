@@ -6,12 +6,19 @@
     <link rel="stylesheet" href="scene.css" />
   </head>
   <body>
-    <h1>3DScene!</h1>
+    <h1>Kirby, Click to save the world!</h1>
 
     <canvas id="scene" width="1024" height="512">
       Sorry, your web browser does not appear to support
       the <code>canvas</code> element, either.
     </canvas>
+    <br>
+    Input RGB Values to change the light color! <br>
+    Kirby can only change color while saving the world </br>
+    R: <input name="red" type="number" step="any" min="0" max="10" id="redValue">
+    G: <input name="green" type="number" step="any" min="0" max="10" id="greenValue">
+    B: <input name="blue" type="number" step="any" min="0" max="10" id="blueValue">
+    <input type="button" value="Change Light Color" id="ChangeColor">
 
     <!-- jQuery makes some things more convenient. -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
