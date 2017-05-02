@@ -42,6 +42,7 @@
         }
 
         toNormalArray (indexedVertices) {
+            let Vector = window.Vector;
             let result = [];
 
             // For each face...
@@ -67,9 +68,10 @@
             }
 
             return result;
-        };
+        }
 
         toVertexNormalArray (indexedVertices) {
+            let Vector = window.Vector;
             let result = [];
 
             // For each face...

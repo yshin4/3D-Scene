@@ -56,7 +56,7 @@
         }
 
         getTransformMatrix (px, py, pz) {
-            return[
+            return [
                 1, 0, 0, 0,
                 0, 1, 0, 0,
                 0, 0, 1, 0,
@@ -121,6 +121,7 @@
         }
 
         getCameraMatrix(px, py, pz, qx, qy, qz, ux, uy, uz){
+            let Vector = window.Vector;
             let u = new Vector([ux], [uy], [uz]);
             let p = new Vector([px], [py], [pz]);
             let q = new Vector([qx], [qy], [qz]);
@@ -132,17 +133,17 @@
                 x.x,
                 x.y,
                 x.z,
-                -1 * (p.dot(x)),
+                -1 * p.dot(x),
 
                 y.x,
                 y.y,
                 y.z,
-                -1 * (p.dot(y)),
+                -1 * p.dot(y),
 
                 z.x,
                 z.y,
                 z.z,
-                -1 * (p.dot(y)),
+                -1 * p.dot(y),
 
                 0,
                 0,
@@ -335,9 +336,9 @@
             gl.uniform3fv(lightSpecular, [1.0, 1.0, 1.0]);
 
             let ChangeLightColor = () => {
-                let r = document.getElementById("redValue").value
-                let g = document.getElementById("greenValue").value
-                let b = document.getElementById("blueValue").value
+                let r = document.getElementById("redValue").value;
+                let g = document.getElementById("greenValue").value;
+                let b = document.getElementById("blueValue").value;
                 lightColor = [r, g, b];
                 gl.uniform3fv(lightDiffuse, lightColor);
             };
@@ -390,22 +391,15 @@
                 currentRotation += DEGREES_PER_MILLISECOND * progress;
 
                 position.y += velocity;
-              
-                //hits ground, velocity flips, decreases
 
                 velocity += acceleration * ACCELERATION_COEFFICIENT;
 
-                // if(position.y < -1.4){
-                //     velocity *= -1;
-                //     velocity -= 0.1;
-                // }
-
-                if(position.y < ground){
+                if (position.y < ground){
                     velocity *= -1;
                 }
 
-                if(position.y > 1.7){
-                  velocity -= 0.3 * velocity;
+                if (position.y > 1.7){
+                    velocity -= 0.3 * velocity;
                 }
 
                 drawScene();

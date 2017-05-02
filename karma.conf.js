@@ -13,6 +13,8 @@ module.exports = function (config) {
       "Mesh.js",
       "MeshLibrary.js",
       "Objecto.js",
+      "vector.js",
+      "test/vector-test.js",
       "test/object-test.js",
       "test/mesh-test.js",
       "test/meshLibrary-test.js"
